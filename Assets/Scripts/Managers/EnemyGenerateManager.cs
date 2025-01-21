@@ -12,7 +12,6 @@ namespace Managers
 	{
 		[Header("Prefabs")]
 		[SerializeField] private GameObject enemyPrefab;
-
 		[Header("Generate preferences")]
 		[SerializeField] private int initializeEnemyCount;
 		[SerializeField] private Transform rangeTarget;
