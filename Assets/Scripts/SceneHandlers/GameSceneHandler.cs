@@ -10,6 +10,8 @@ namespace SceneHandlers
 		private void Awake()
 		{
 			ModuleManager.Instance.RegisterModule(new CameraModule());
+
+			Application.targetFrameRate = 120;
 		}
 	}
 }

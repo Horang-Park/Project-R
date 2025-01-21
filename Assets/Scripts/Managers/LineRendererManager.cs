@@ -38,13 +38,15 @@ namespace Managers
 
 		private void SetPosition(int index, Vector2 position)
 		{
+			_lineRenderer.DOKill();
+			ResetColor();
+			
 			_lineRenderer.SetPosition(index, position);
 		}
 
 		private void OnMouseUpInitialize()
 		{
-			_lineRenderer.DOComplete(true);
-			
+			_lineRenderer.DOKill();
 			_lineRenderer.DOColor(new Color2(Color.white, Color.white), new Color2(Color.clear, Color.clear), 0.2f)
 				.OnComplete(() =>
 				{
@@ -53,9 +55,14 @@ namespace Managers
 						_lineRenderer.SetPosition(index, Vector3.zero);
 					}
 
-					_lineRenderer.startColor = Color.white;
-					_lineRenderer.endColor = Color.white;
+					ResetColor();
 				});
+		}
+
+		private void ResetColor()
+		{
+			_lineRenderer.startColor = Color.white;
+			_lineRenderer.endColor = Color.white;
 		}
 	}
 }
