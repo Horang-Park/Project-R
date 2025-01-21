@@ -8,10 +8,12 @@ namespace Managers
 {
 	public class DragInputManager : MonoSingleton<DragInputManager>
 	{
-		[Header("Event Providers")] public Vector2ReactiveProperty onPointerDownPositionEventProvider = new();
+		[Header("Event Providers")]
+		public Vector2ReactiveProperty onPointerDownPositionEventProvider = new();
 		public Vector2ReactiveProperty onDragPositionEventProvider = new();
 		public Vector2ReactiveProperty onPointerUpPositionEventProvider = new();
-		[Header("Options")] public bool blockInput;
+		[Header("Options")]
+		public bool blockInput;
 
 		private Camera _mainCamera;
 
