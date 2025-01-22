@@ -44,7 +44,7 @@ namespace Managers
 		private Enemy OnCreate()
 		{
 			var enemy = Instantiate(enemyPrefab, transform);
-			var component = enemy.GetComponent(typeof(Enemy)) as Enemy;
+			var component = enemy.GetComponent<Enemy>();
 			component!.EnemyPool = _enemyPool;
 
 			return component;

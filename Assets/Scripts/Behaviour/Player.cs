@@ -13,7 +13,7 @@ namespace Behaviour
 
 		private void Awake()
 		{
-			_rigidbody2D = GetComponent(typeof(Rigidbody2D)) as Rigidbody2D;
+			_rigidbody2D = GetComponent<Rigidbody2D>();
 		}
 
 		private void Start()

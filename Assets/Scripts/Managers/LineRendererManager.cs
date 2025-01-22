@@ -10,7 +10,7 @@ namespace Managers
 
 		private void Awake()
 		{
-			_lineRenderer = GetComponent(typeof(LineRenderer)) as LineRenderer;
+			_lineRenderer = GetComponent<LineRenderer>();
 
 			gameObject.hideFlags = HideFlags.HideInHierarchy;
 		}
