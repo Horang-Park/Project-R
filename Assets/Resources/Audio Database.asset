@@ -12,4 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa8ec51d1da4a41a0cb2865f9014f6e, type: 3}
   m_Name: Audio Database
   m_EditorClassIdentifier: 
-  audioClipDatas: []
+  audioClipDatas:
+  - name: 
+    audioClip: {fileID: 0}
+    audioPlayType: 0
+    audioClipVolume: 1
+    audioClipPan: 0
+    audioClipAdditionalData:
+      length: 0
+      extension: 
+      importPath: 
+      channel: 0
+      samplingFrequency: 0
+      sampleCount: 0
+      instanceId: 0

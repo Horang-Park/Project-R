@@ -1,3 +1,7 @@
+using Horang.HorangUnityLibrary.Managers.Module;
+using Horang.HorangUnityLibrary.Modules.AudioModule;
+using Managers;
+using Stores;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -19,11 +23,12 @@ namespace Behaviour.PoolableObjects
 				return;
 			}
 
-			// EffectManager.Instance.ShowEffect("enemy_die", col.transform.position);
-			// SoundManager.Instance.Play("Enemy Die");
+			ParticleEffectManager.Instance.ShowEffect("Enemy Die", col.transform.position);
+			// ModuleManager.Instance.GetModule<AudioModule>()!.Play("Enemy Die");
 
-			// GlobalDataContainer.score.Value += (int)(GlobalDataContainer.DefaultEnemyScore * GlobalDataContainer.feverMultiplier.Value);
-			// GlobalDataContainer.killedEnemyCount.Value++;
+			OneCycleRecordStore.KilledEnemies.Value++;
+			OneCycleRecordStore.Score.Value += (int)(ConstantStore.DefaultKillScore * OneCycleRecordStore.CurrentFeverMultiplier.Value);
+			
 			// RecordDataContainer.totalKilledEnemyCount++;
 
 			_enemyPool.Release(this);
