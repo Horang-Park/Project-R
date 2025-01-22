@@ -1,6 +1,7 @@
 using System;
 using Behaviour.PoolableObjects;
 using Horang.HorangUnityLibrary.Foundation;
+using Horang.HorangUnityLibrary.Utilities;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -35,7 +36,7 @@ namespace Managers
 
 			Observable.EveryUpdate()
 				.ThrottleFirst(TimeSpan.FromMilliseconds(500))
-				.Where(_ => _currentShowingEnemyCount <= 70)
+				.Where(_ => _currentShowingEnemyCount <= initializeEnemyCount * 0.75f)
 				.Subscribe(_ => EnemyAutoGenerator())
 				.AddTo(this);
 		}
@@ -51,7 +52,7 @@ namespace Managers
 
 		private void OnGet(Enemy enemy)
 		{
-			enemy.transform.position = GetRandomizePosition();
+			enemy.transform.position = GetCircularRandomizePosition();
 			enemy.gameObject.SetActive(true);
 
 			_currentShowingEnemyCount++;
@@ -153,6 +154,11 @@ namespace Managers
 			}
 
 			return randomizedPosition;
+		}
+
+		private Vector2 GetCircularRandomizePosition()
+		{
+			return Random.insideUnitCircle * outerRange;
 		}
 	}
 }
