@@ -3,7 +3,7 @@ using TMPro;
 using UniRx;
 using UnityEngine;
 
-namespace UI.Elements
+namespace UI
 {
 	public class ScoreController : MonoBehaviour
 	{

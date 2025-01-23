@@ -2,6 +2,7 @@ using Horang.HorangUnityLibrary.Managers.Module;
 using Horang.HorangUnityLibrary.Modules.AudioModule;
 using Managers;
 using Stores;
+using UI.Fever;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -28,8 +29,11 @@ namespace Behaviour.PoolableObjects
 
 			OneCycleRecordStore.KilledEnemies.Value++;
 			OneCycleRecordStore.Score.Value += (int)(ConstantStore.DefaultKillScore * OneCycleRecordStore.CurrentFeverMultiplier.Value);
-			
-			// RecordDataContainer.totalKilledEnemyCount++;
+
+			if (FeverManager.Instance.FeverTimeGageController.IsFeverTime is false)
+			{
+				OneCycleRecordStore.KilledEnemiesForFeverTime.Value++;
+			}
 
 			_enemyPool.Release(this);
 		}
