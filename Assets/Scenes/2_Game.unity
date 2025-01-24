@@ -177,7 +177,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0 000 000
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0a26f6d50a2cc467a910b16937eb9258, type: 2}
   m_sharedMaterial: {fileID: 254350640010241551, guid: 0a26f6d50a2cc467a910b16937eb9258, type: 2}
@@ -318,7 +318,7 @@ MonoBehaviour:
   initializeEnemyCount: 300
   rangeTarget: {fileID: 1725747719}
   innerRange: 5
-  outerRange: 60
+  outerRange: 50
 --- !u!1 &217841062
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,6 +383,7 @@ GameObject:
   - component: {fileID: 513624395}
   - component: {fileID: 513624397}
   - component: {fileID: 513624396}
+  - component: {fileID: 513624398}
   m_Layer: 5
   m_Name: Fever Multiplier
   m_TagString: Untagged
@@ -432,7 +433,7 @@ MonoBehaviour:
   m_text: x1.0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 27f29d509cd38470395f53c633e091f9, type: 2}
-  m_sharedMaterial: {fileID: 481874922485610071, guid: 27f29d509cd38470395f53c633e091f9, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 466551f5be74746c9a78979e5a501f77, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -508,6 +509,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 513624394}
   m_CullTransparentMesh: 1
+--- !u!114 &513624398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513624394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fc33687d9bd490387da848259d7330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,7 +1566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b026b231546e47818712ddec513a6bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotPower: 2
+  shotPower: 3
 --- !u!1 &1830111687
 GameObject:
   m_ObjectHideFlags: 0

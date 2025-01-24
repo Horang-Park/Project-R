@@ -21,7 +21,6 @@ namespace UI.Fever
 					throw new OverflowException();
 				}
 
-				_foreground.DOKill();
 				_foreground.fillAmount = value;
 			}
 		}
@@ -36,14 +35,22 @@ namespace UI.Fever
 
 					throw new OverflowException();
 				}
-				
+
 				_foreground.DOKill();
+				
+				if (_foreground.fillAmount + value >= 1.0f)
+				{
+					_foreground.fillAmount = 1.0f;
+
+					return;
+				}
+				
 				_foreground.fillAmount += value;
 			}
 		}
 
 		public bool IsFeverTime => _isFeverTime;
-		
+
 		private Image _foreground;
 		private bool _isFeverTime;
 
@@ -57,7 +64,6 @@ namespace UI.Fever
 			Observable.EveryUpdate()
 				.Where(_ => _isFeverTime)
 				.Where(_ => _foreground.fillAmount > 0.0f)
-				.ThrottleFirst(TimeSpan.FromMilliseconds(1000.0f))
 				.Subscribe(_ => Timer())
 				.AddTo(gameObject);
 
@@ -74,10 +80,14 @@ namespace UI.Fever
 				.SetEase(Ease.Linear)
 				.OnComplete(() =>
 				{
-					if (_foreground.fillAmount <= 0.0f && _isFeverTime)
+					if (_foreground.fillAmount > 0.0f || _isFeverTime is false)
 					{
-						_isFeverTime = false;
+						return;
 					}
+
+					_isFeverTime = false;
+
+					OneCycleRecordStore.CurrentFeverMultiplier.Value = ConstantStore.DefaultFeverMultiplier;
 				});
 		}
 
@@ -88,7 +98,7 @@ namespace UI.Fever
 			if (value < 1.0f && _isFeverTime is false)
 			{
 				_foreground.DOFillAmount(value, 0.3f);
-				
+
 				return;
 			}
 

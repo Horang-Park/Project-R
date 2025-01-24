@@ -1,8 +1,5 @@
-using Horang.HorangUnityLibrary.Managers.Module;
-using Horang.HorangUnityLibrary.Modules.AudioModule;
 using Managers;
 using Stores;
-using UI.Fever;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -27,13 +24,22 @@ namespace Behaviour.PoolableObjects
 			ParticleEffectManager.Instance.ShowEffect("Enemy Die", col.transform.position);
 			// ModuleManager.Instance.GetModule<AudioModule>()!.Play("Enemy Die");
 
-			OneCycleRecordStore.KilledEnemies.Value++;
-			OneCycleRecordStore.Score.Value += (int)(ConstantStore.DefaultKillScore * OneCycleRecordStore.CurrentFeverMultiplier.Value);
-
 			if (FeverManager.Instance.FeverTimeGageController.IsFeverTime is false)
 			{
 				OneCycleRecordStore.KilledEnemiesForFeverTime.Value++;
 			}
+			else
+			{
+				OneCycleRecordStore.CurrentFeverMultiplier.Value += ConstantStore.FeverMultiplierIncreaseStep;
+				
+				FeverManager.Instance.FeverTimeGageController.AddValue = 1.0f / ConstantStore.RequireKilledEnemyCountToSetFeverMode;
+			}
+			
+			OneCycleRecordStore.KilledEnemies.Value++;
+
+			var multiplier = (int)(OneCycleRecordStore.CurrentFeverMultiplier.Value * 10);
+			
+			OneCycleRecordStore.Score.Value += (int)(ConstantStore.DefaultKillScore * (multiplier * 0.1f));
 
 			_enemyPool.Release(this);
 		}
