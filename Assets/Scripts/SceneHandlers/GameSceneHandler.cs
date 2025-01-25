@@ -1,11 +1,8 @@
-using System;
-using Cysharp.Threading.Tasks;
 using Horang.HorangUnityLibrary.Managers.Module;
 using Horang.HorangUnityLibrary.Modules.AudioModule;
 using Horang.HorangUnityLibrary.Modules.CameraModule;
 using Stores;
 using UI;
-using UI.Game;
 using UnityEngine;
 
 namespace SceneHandlers
@@ -22,6 +19,7 @@ namespace SceneHandlers
 
 		private void Start()
 		{
+			OneCycleRecordStore.Flush();
 			FullFadeManager.Instance.FadeIn();
 		}
 	}

@@ -523,8 +523,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4aa81ce34914ca0ad5c61b2d1c3f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyOnLoadObject: 0
-  gameObjectHideFlags: 8
 --- !u!114 &361402212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,7 +536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
