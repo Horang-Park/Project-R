@@ -21,9 +21,9 @@ namespace UI.Fever
                 .AddTo(gameObject);
         }
 
-        private void MultiplierUpdater(float multiplier)
+        private void MultiplierUpdater(int multiplier)
         {
-            _text.text = $"x{multiplier:F1}";
+            _text.text = $"x{multiplier * 0.1f:F1}";
         }
     }
 }

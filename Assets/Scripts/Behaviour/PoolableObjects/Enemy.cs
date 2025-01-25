@@ -36,10 +36,8 @@ namespace Behaviour.PoolableObjects
 			}
 			
 			OneCycleRecordStore.KilledEnemies.Value++;
-
-			var multiplier = (int)(OneCycleRecordStore.CurrentFeverMultiplier.Value * 10);
 			
-			OneCycleRecordStore.Score.Value += (int)(ConstantStore.DefaultKillScore * (multiplier * 0.1f));
+			OneCycleRecordStore.Score.Value += (int)(ConstantStore.DefaultKillScore * (OneCycleRecordStore.CurrentFeverMultiplier.Value  * 0.1f));
 
 			_enemyPool.Release(this);
 		}

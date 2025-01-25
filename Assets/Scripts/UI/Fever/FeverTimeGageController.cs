@@ -74,21 +74,32 @@ namespace UI.Fever
 
 		private void Timer()
 		{
-			var target = _foreground.fillAmount - ConstantStore.FeverTimeDecreaseStep * OneCycleRecordStore.CurrentFeverMultiplier.Value;
+			// var target = _foreground.fillAmount - ConstantStore.FeverTimeDecreaseStep * OneCycleRecordStore.CurrentFeverMultiplier.Value;
 
-			_foreground.DOFillAmount(target, 0.987f)
-				.SetEase(Ease.Linear)
-				.OnComplete(() =>
-				{
-					if (_foreground.fillAmount > 0.0f || _isFeverTime is false)
-					{
-						return;
-					}
+			_foreground.fillAmount -= ConstantStore.FeverTimeDecreaseStep * OneCycleRecordStore.CurrentFeverMultiplier.Value * Time.deltaTime;
+			
+			if (_foreground.fillAmount > 0.0f || _isFeverTime is false)
+			{
+				return;
+			}
 
-					_isFeverTime = false;
+			_isFeverTime = false;
 
-					OneCycleRecordStore.CurrentFeverMultiplier.Value = ConstantStore.DefaultFeverMultiplier;
-				});
+			OneCycleRecordStore.CurrentFeverMultiplier.Value = ConstantStore.DefaultFeverMultiplier;
+
+			// _foreground.DOFillAmount(target, 0.987f)
+			// 	.SetEase(Ease.Linear)
+			// 	.OnComplete(() =>
+			// 	{
+			// 		if (_foreground.fillAmount > 0.0f || _isFeverTime is false)
+			// 		{
+			// 			return;
+			// 		}
+			//
+			// 		_isFeverTime = false;
+			//
+			// 		OneCycleRecordStore.CurrentFeverMultiplier.Value = ConstantStore.DefaultFeverMultiplier;
+			// 	});
 		}
 
 		private void KilledEnemiesForFeverTimeUpdater(int count)
