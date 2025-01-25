@@ -2,6 +2,8 @@ using Horang.HorangUnityLibrary.Foundation;
 using Horang.HorangUnityLibrary.Managers.Module;
 using Horang.HorangUnityLibrary.Modules.CameraModule;
 using Stores;
+using UI;
+using UI.Game;
 using UniRx;
 using UnityEngine;
 
@@ -49,6 +51,10 @@ namespace Managers
 
 			OneCycleRecordStore.IsTimeOver
 				.Subscribe(isTimeOver => _blockInput = isTimeOver)
+				.AddTo(gameObject);
+
+			FullFadeManager.Instance.IsFading
+				.Subscribe(isFading => _blockInput = isFading)
 				.AddTo(gameObject);
 		}
 

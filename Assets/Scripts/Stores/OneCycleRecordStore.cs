@@ -1,9 +1,8 @@
-using Interfaces;
 using UniRx;
 
 namespace Stores
 {
-	public struct OneCycleRecordStore : IFlushable
+	public struct OneCycleRecordStore
 	{
 		public static readonly IntReactiveProperty KilledEnemies = new(0);
 		public static readonly IntReactiveProperty KilledEnemiesForFeverTime = new(0);
@@ -11,7 +10,7 @@ namespace Stores
 		public static readonly IntReactiveProperty CurrentFeverMultiplier = new(ConstantStore.DefaultFeverMultiplier);
 		public static readonly BoolReactiveProperty IsTimeOver = new(false);
 		
-		public void Flush()
+		public static void Flush()
 		{
 			KilledEnemies.Value = 0;
 			KilledEnemiesForFeverTime.Value = 0;

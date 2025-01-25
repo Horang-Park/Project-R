@@ -11,7 +11,6 @@ namespace Stores
 		public const int DefaultFeverMultiplier = 10; // 기본 피버 곱 1배
 		public const int FeverMultiplierIncreaseStep = 1; // 피버 타임 중, 적을 하나 처치할 때 마다 기존 점수에 곱해지는 값에 더할 값
 
-		public const int DefaultLimitTime = 60; // 게임 시간 60초
-		public const int LimitTimeDecreaseStep = 1; // 1초 마다 1씩 감소
+		public const int DefaultLimitTime = 3; // 게임 시간 60초
 	}
 }

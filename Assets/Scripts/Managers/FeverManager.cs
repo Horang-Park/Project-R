@@ -1,5 +1,5 @@
 using Horang.HorangUnityLibrary.Foundation;
-using UI.Fever;
+using UI.Game.Fever;
 
 namespace Managers
 {
