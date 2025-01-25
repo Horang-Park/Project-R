@@ -1,6 +1,7 @@
 using Horang.HorangUnityLibrary.Foundation;
 using Horang.HorangUnityLibrary.Managers.Module;
 using Horang.HorangUnityLibrary.Modules.CameraModule;
+using Stores;
 using UniRx;
 using UnityEngine;
 
@@ -12,10 +13,9 @@ namespace Managers
 		public Vector2ReactiveProperty onPointerDownPositionEventProvider = new();
 		public Vector2ReactiveProperty onDragPositionEventProvider = new();
 		public Vector2ReactiveProperty onPointerUpPositionEventProvider = new();
-		[Header("Options")]
-		public bool blockInput;
-
+		
 		private Camera _mainCamera;
+		private bool _blockInput;
 
 		public void DisposeEvents()
 		{
@@ -33,18 +33,22 @@ namespace Managers
 			_mainCamera = ModuleManager.Instance.GetModule<CameraModule>()!.GetCamera("Main Camera");
 
 			Observable.EveryUpdate()
-				.Where(_ => Input.GetMouseButtonDown(0) && blockInput is false)
+				.Where(_ => Input.GetMouseButtonDown(0) && _blockInput is false)
 				.Subscribe(_ => MouseButtonDownUpdater())
 				.AddTo(gameObject);
 
 			Observable.EveryUpdate()
-				.Where(_ => Input.GetMouseButton(0) && blockInput is false)
+				.Where(_ => Input.GetMouseButton(0) && _blockInput is false)
 				.Subscribe(_ => MouseButtonDragUpdater())
 				.AddTo(gameObject);
 
 			Observable.EveryUpdate()
-				.Where(_ => Input.GetMouseButtonUp(0) && blockInput is false)
+				.Where(_ => Input.GetMouseButtonUp(0) && _blockInput is false)
 				.Subscribe(_ => MouseButtonUpUpdater())
+				.AddTo(gameObject);
+
+			OneCycleRecordStore.IsTimeOver
+				.Subscribe(isTimeOver => _blockInput = isTimeOver)
 				.AddTo(gameObject);
 		}
 
