@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Managers;
 using Stores;
 using TMPro;
 using UniRx;
@@ -34,7 +35,7 @@ namespace UI.Game.GameOver
 			OneCycleRecordStore.IsTimeOver
 				.Where(isTimeOver => isTimeOver)
 				.Subscribe(_ => Show())
-				.AddTo(gameObject);
+				.AddTo(this);
 		}
 
 		private void Show()
@@ -63,6 +64,8 @@ namespace UI.Game.GameOver
 		
 		private void Back()
 		{
+			DragInputManager.Instance.DisposeEvents();
+			
 			FullFadeManager.Instance.FadeOut(() =>
 			{
 				SceneManager.LoadSceneAsync(1).ToUniTask();

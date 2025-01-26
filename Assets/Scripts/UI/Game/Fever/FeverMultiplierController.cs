@@ -18,7 +18,7 @@ namespace UI.Game.Fever
         {
             OneCycleRecordStore.CurrentFeverMultiplier
                 .Subscribe(MultiplierUpdater)
-                .AddTo(gameObject);
+                .AddTo(this);
         }
 
         private void MultiplierUpdater(int multiplier)

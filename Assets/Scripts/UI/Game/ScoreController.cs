@@ -20,7 +20,9 @@ namespace UI
 
 		private void Start()
 		{
-			OneCycleRecordStore.Score.Subscribe(ScoreUpdate);
+			OneCycleRecordStore.Score
+				.Subscribe(ScoreUpdate)
+				.AddTo(this);
 		}
 
 		private void ScoreUpdate(int score)

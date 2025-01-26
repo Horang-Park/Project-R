@@ -415,7 +415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoadObject: 0
-  gameObjectHideFlags: 8
+  gameObjectHideFlags: 0
   enemyPrefab: {fileID: 2698698286516978928, guid: e6242fb385d6e4a9e99dc8865713a400, type: 3}
   initializeEnemyCount: 300
   rangeTarget: {fileID: 1725747719}
@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoadObject: 0
-  gameObjectHideFlags: 8
+  gameObjectHideFlags: 0
   onPointerDownPositionEventProvider:
     value: {x: 0, y: 0}
   onDragPositionEventProvider:
@@ -957,7 +957,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 95
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2103,7 +2103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoadObject: 0
-  gameObjectHideFlags: 8
+  gameObjectHideFlags: 0
 --- !u!1 &1619726614
 GameObject:
   m_ObjectHideFlags: 0
@@ -2324,7 +2324,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2632,7 +2632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoadObject: 0
-  gameObjectHideFlags: 8
+  gameObjectHideFlags: 0
   effects:
   - name: Enemy Die
     prefab: {fileID: 2958556897414919797, guid: 2858f81114fc6433f98940f9c7fff6b7, type: 3}

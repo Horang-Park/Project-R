@@ -17,7 +17,7 @@
         "com.unity.nuget.newtonsoft-json": "3.0.2",
         "com.unity.textmeshpro": "3.0.6"
       },
-      "hash": "71f0c30aafef93ed84609889f0bace2f1101cdcc"
+      "hash": "f4aa818afc8bada3c860854ad3e3e7ac052c1c67"
     },
     "com.neuecc.unirx": {
       "version": "https://github.com/neuecc/UniRx.git?path=Assets/Plugins/UniRx/Scripts",

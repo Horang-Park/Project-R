@@ -69,7 +69,7 @@ namespace UI.Game.Fever
 
 			OneCycleRecordStore.KilledEnemiesForFeverTime
 				.Subscribe(KilledEnemiesForFeverTimeUpdater)
-				.AddTo(gameObject);
+				.AddTo(this);
 		}
 
 		private void Timer()

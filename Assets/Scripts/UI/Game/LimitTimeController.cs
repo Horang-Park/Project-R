@@ -9,11 +9,13 @@ namespace UI.Game
 	public class LimitTimeController : MonoBehaviour
 	{
 		private TMP_Text _text;
-		private int _currentTime = ConstantStore.DefaultLimitTime;
+		private int _currentTime;
 
 		private void Awake()
 		{
 			_text = GetComponent<TMP_Text>();
+			
+			_currentTime = ConstantStore.DefaultLimitTime;
 		}
 
 		private void Start()

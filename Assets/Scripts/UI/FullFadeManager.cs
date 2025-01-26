@@ -1,24 +1,21 @@
 using System;
 using DG.Tweening;
+using Horang.HorangUnityLibrary.Foundation;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI
 {
-	public class FullFadeManager : MonoBehaviour
+	public class FullFadeManager : MonoSingleton<FullFadeManager>
 	{
-		public static FullFadeManager Instance;
-		
 		public readonly BoolReactiveProperty IsFading = new();
 		
 		private Image _image;
 
-		private void Awake()
+		protected override void Awake()
 		{
 			_image = GetComponent<Image>();
-			
-			Instance = this;
 		}
 
 		public void FadeIn(Action onComplete = null)

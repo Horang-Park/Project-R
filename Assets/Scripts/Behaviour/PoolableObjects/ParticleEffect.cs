@@ -25,7 +25,7 @@ namespace Behaviour.PoolableObjects
 			Observable.EveryUpdate()
 				.Where(_ => _particleSystem.isStopped)
 				.Subscribe(_ => AutoHide())
-				.AddTo(gameObject);
+				.AddTo(this);
 		}
 
 		private void AutoHide()

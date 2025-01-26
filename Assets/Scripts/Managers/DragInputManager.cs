@@ -33,7 +33,7 @@ namespace Managers
 		private void Start()
 		{
 			_mainCamera = ModuleManager.Instance.GetModule<CameraModule>()!.GetCamera("Main Camera");
-
+			
 			Observable.EveryUpdate()
 				.Where(_ => Input.GetMouseButtonDown(0) && _blockInput is false)
 				.Subscribe(_ => MouseButtonDownUpdater())
@@ -51,11 +51,11 @@ namespace Managers
 
 			OneCycleRecordStore.IsTimeOver
 				.Subscribe(isTimeOver => _blockInput = isTimeOver)
-				.AddTo(gameObject);
+				.AddTo(this);
 
 			FullFadeManager.Instance.IsFading
 				.Subscribe(isFading => _blockInput = isFading)
-				.AddTo(gameObject);
+				.AddTo(this);
 		}
 
 		private void MouseButtonDownUpdater()

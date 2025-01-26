@@ -11,24 +11,22 @@ namespace Managers
 		private void Awake()
 		{
 			_lineRenderer = GetComponent<LineRenderer>();
-
-			gameObject.hideFlags = HideFlags.HideInHierarchy;
 		}
 
 		private void Start()
 		{
 			DragInputManager.Instance.onPointerDownPositionEventProvider
 				.Subscribe(pos => SetPosition(0, pos))
-				.AddTo(this);
+				.AddTo(gameObject);
 			
 			DragInputManager.Instance.onDragPositionEventProvider
 				.Subscribe(pos => SetPosition(1, pos))
-				.AddTo(this);
+				.AddTo(gameObject);
 
 			Observable.EveryUpdate()
 				.Where(_ => Input.GetMouseButtonUp(0))
 				.Subscribe(_ => OnMouseUpInitialize())
-				.AddTo(this);
+				.AddTo(gameObject);
 		}
 
 		private void OnDestroy()
