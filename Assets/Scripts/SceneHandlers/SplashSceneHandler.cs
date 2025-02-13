@@ -1,9 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Horang.HorangUnityLibrary.Managers.Module;
 using Horang.HorangUnityLibrary.Modules.AudioModule;
-using Horang.HorangUnityLibrary.Modules.CameraModule;
 using TMPro;
 using UI;
 using UnityEngine;
@@ -18,11 +16,11 @@ namespace SceneHandlers
 
 		private void Start()
 		{
-			ModuleManager.Instance.RegisterModule(new AudioModule());
-
 			Application.targetFrameRate = 120;
 			
 			Animation();
+
+			AudioModule.OnInitialize();
 		}
 
 		private void Animation()

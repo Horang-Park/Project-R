@@ -1,9 +1,7 @@
 using Horang.HorangUnityLibrary.Foundation;
-using Horang.HorangUnityLibrary.Managers.Module;
 using Horang.HorangUnityLibrary.Modules.CameraModule;
 using Stores;
 using UI;
-using UI.Game;
 using UniRx;
 using UnityEngine;
 
@@ -32,7 +30,7 @@ namespace Managers
 
 		private void Start()
 		{
-			_mainCamera = ModuleManager.Instance.GetModule<CameraModule>()!.GetCamera("Main Camera");
+			_mainCamera = CameraModule.GetCamera("Main Camera");
 			
 			Observable.EveryUpdate()
 				.Where(_ => Input.GetMouseButtonDown(0) && _blockInput is false)

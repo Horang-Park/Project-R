@@ -5,7 +5,6 @@ namespace UI.Common
 {
 	public enum CommonUIVisibility
 	{
-		Invalid = 0b0000,
 		Showing = 0b0010,
 		Show = 0b0011,
 		Hiding = 0b1000,
@@ -14,32 +13,27 @@ namespace UI.Common
 	
 	public abstract class BaseCommonUI : MonoBehaviour
 	{
-		
 		protected RectTransform MainBackground;
-		protected CommonUIVisibility CommonUIVisibility = CommonUIVisibility.Invalid;
+		protected CommonUIVisibility CommonUIVisibility = CommonUIVisibility.Hide;
 		
 		private CanvasGroup _canvasGroup;
 
-		private void Awake()
+		protected abstract void SetData();
+
+		public void Initialize()
 		{
 			_canvasGroup = GetComponent<CanvasGroup>();
 			MainBackground = transform.GetChild(0).GetComponent<RectTransform>();
-		}
 
-		private void Start()
-		{
 			_canvasGroup.interactable = false;
 			_canvasGroup.blocksRaycasts = false;
 		}
 
 		public virtual void Show()
 		{
-			if ((int)CommonUIVisibility >> 1 == 0b0001)
-			{
-				return;
-			}
-			
-			_canvasGroup.DOFade(1.0f, 0.5f)
+			SetData();
+
+			_canvasGroup.DOFade(1.0f, 0.4f)
 				.OnPlay(() =>
 				{
 					_canvasGroup.blocksRaycasts = true;
@@ -49,17 +43,13 @@ namespace UI.Common
 				{
 					_canvasGroup.interactable = true;
 					CommonUIVisibility = CommonUIVisibility.Show;
-				});
+				})
+				.From(0.0f);
 		}
 
-		public virtual void Hide()
+		protected virtual void Hide()
 		{
-			if ((int)CommonUIVisibility >> 3 == 0b0001)
-			{
-				return;
-			}
-			
-			_canvasGroup.DOFade(0.0f, 0.3f)
+			_canvasGroup.DOFade(0.0f, 0.2f)
 				.OnPlay(() =>
 				{
 					_canvasGroup.interactable = false;
@@ -68,9 +58,10 @@ namespace UI.Common
 				.OnComplete(() =>
 				{
 					_canvasGroup.blocksRaycasts = false;
-					
+
 					CommonUIVisibility = CommonUIVisibility.Hide;
-				});
+				})
+				.From(1.0f);
 		}
 	}
 }
