@@ -24,10 +24,12 @@ namespace Managers
             }
         }
 
+        public bool IsUserDisplayNameNullOrEmpty => string.IsNullOrEmpty(_auth.CurrentUser.DisplayName) || string.IsNullOrWhiteSpace(_auth.CurrentUser.DisplayName);
+
         private FirebaseApp _app;
         private FirebaseAuth _auth;
 
-        public bool CheckDependencies()
+        public void CheckDependencies()
         {
             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
             {
@@ -38,17 +40,13 @@ namespace Managers
                     _app = FirebaseApp.DefaultInstance;
                     _auth = FirebaseAuth.DefaultInstance;
 
-                    return true;
+                    Log.Print("Check and fix dependencies all done.");
                 }
-
-                Log.Print($"Could not resolve all Firebase dependencies: {dependencyStatus}");
-
-                return false;
+                else
+                {
+                    Log.Print($"Could not resolve all Firebase dependencies: {dependencyStatus}");
+                }
             });
-
-            Log.Print("Check and fix dependencies all done.");
-
-            return true;
         }
 
         public void AnonymouslyAuth(FirebasePostActions actions = default)

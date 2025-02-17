@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Horang.HorangUnityLibrary.Modules.AudioModule;
@@ -18,11 +17,11 @@ namespace SceneHandlers
 		[SerializeField] private TMP_Text studioName;
 		[SerializeField] private TMP_Text studioText;
 
-		private async void Start()
+		private void Start()
 		{
 			Application.targetFrameRate = 120;
 
-			await UniTask.WaitUntil(() => FirebaseManager.Instance.CheckDependencies());
+			FirebaseManager.Instance.CheckDependencies();
 
 			Animation();
 
@@ -70,7 +69,7 @@ namespace SceneHandlers
 			}
 			catch (Exception e)
 			{
-				// ignored
+				Log.Print($"Auth throw an exception. -> {e.Message}", LogPriority.Exception);
 			}
 		}
 
@@ -78,8 +77,9 @@ namespace SceneHandlers
 		{
 			CommonCanvasManager.Instance.ShowPopup(new PopupController.Data(
 				Context: "Canceled to login. Please re-lunch game.",
-				Title: "Login Failed.",
-				RightButtonAction: () => { Application.Quit(-400); }));
+				Title: "Login Canceled.",
+				RightButtonAction: () => { Application.Quit(-400); },
+				UseOneButton: true));
 		}
 
 		private static void OnFailed(string exceptionMessage)
@@ -87,8 +87,8 @@ namespace SceneHandlers
 			CommonCanvasManager.Instance.ShowPopup(new PopupController.Data(
 				Context: "Failed to login. Please re-lunch game.",
 				Title: "Login Failed.",
-				RightButtonAction: () => { Application.Quit(-401); }));
+				RightButtonAction: () => { Application.Quit(-401); },
+				UseOneButton: true));
 		}
-
 	}
 }
