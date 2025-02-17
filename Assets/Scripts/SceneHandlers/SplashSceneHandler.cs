@@ -1,9 +1,8 @@
 using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Firebase.Extensions;
 using Horang.HorangUnityLibrary.Modules.AudioModule;
-using Horang.HorangUnityLibrary.Utilities;
+using Managers;
 using TMPro;
 using UI;
 using UI.Common;
@@ -36,64 +35,55 @@ namespace SceneHandlers
 			studioName.DOText("Horang", 1.0f)
 				.From(string.Empty)
 				.SetEase(Ease.Linear)
-				.OnPlay(DoAnonymouslyAuth)
-				.OnComplete(ShowStudio);
+				.OnComplete(Auth);
+		}
+
+		private void Auth()
+		{
+			FirebaseManager.Instance.AnonymouslyAuth(new FirebaseManager.FirebasePostActions(onSuccess: ShowStudio, onCanceled: OnCanceled, onFailed: OnFailed));
 		}
 
 		private void ShowStudio()
 		{
 			studioText.DOFade(1.0f, 0.5f)
-				.From(0.0f);
+				.From(0.0f)
+				.OnComplete(LoadMainScene);
 			studioText.rectTransform.DOAnchorPosY(-45.0f, 0.5f)
 				.From(new Vector2(0.0f, -55.0f));
 		}
 
-		private void DoAnonymouslyAuth()
+		private static async void LoadMainScene()
 		{
-			var auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
-
-			auth.SignInAnonymouslyAsync().ContinueWithOnMainThread(task =>
+			try
 			{
-				if (task.IsCanceled)
+				await UniTask.Delay(TimeSpan.FromMilliseconds(1000.0f));
+
+				FullFadeManager.Instance.FadeOut(() =>
 				{
-					Log.Print("SignInAnonymouslyAsync auth canceled.");
-
-					CommonCanvasManager.Instance.ShowPopup(new PopupController.Data(
-						Context: "Canceled to login. Please re-lunch game.",
-						Title: "Login Failed.",
-						RightButtonAction: () => { Application.Quit(-400); }));
-
-					return;
-				}
-
-				if (task.IsFaulted)
-				{
-					Debug.LogError("SignInAnonymouslyAsync encountered an error: " + task.Exception);
-
-					CommonCanvasManager.Instance.ShowPopup(new PopupController.Data(
-						Context: "Failed to login. Please re-lunch game.",
-						Title: "Login Failed.",
-						RightButtonAction: () => { Application.Quit(-401); }));
-
-					return;
-				}
-
-				var result = task.Result;
-
-				Log.Print($"Success: {result.User.DisplayName} / {result.User.UserId}");
-
-				LoadMainScene();
-			});
+					SceneManager.LoadSceneAsync(1).ToUniTask();
+				});
+			}
+			catch (Exception e)
+			{
+				// ignored
+			}
 		}
 
-		private async void LoadMainScene()
+		private static void OnCanceled()
 		{
-			await UniTask.Delay(TimeSpan.FromMilliseconds(1000.0f));
-			
-			FullFadeManager.Instance.FadeOut(() =>
-			{
-				SceneManager.LoadSceneAsync(1).ToUniTask();
-			});
+			CommonCanvasManager.Instance.ShowPopup(new PopupController.Data(
+				Context: "Canceled to login. Please re-lunch game.",
+				Title: "Login Failed.",
+				RightButtonAction: () => { Application.Quit(-400); }));
 		}
+
+		private static void OnFailed(string exceptionMessage)
+		{
+			CommonCanvasManager.Instance.ShowPopup(new PopupController.Data(
+				Context: "Failed to login. Please re-lunch game.",
+				Title: "Login Failed.",
+				RightButtonAction: () => { Application.Quit(-401); }));
+		}
+
 	}
 }
