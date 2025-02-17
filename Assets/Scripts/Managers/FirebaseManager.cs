@@ -27,10 +27,8 @@ namespace Managers
         private FirebaseApp _app;
         private FirebaseAuth _auth;
 
-        protected override void Awake()
+        public bool CheckDependencies()
         {
-            base.Awake();
-
             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
             {
                 var dependencyStatus = task.Result;
@@ -38,14 +36,19 @@ namespace Managers
                 if (dependencyStatus == DependencyStatus.Available)
                 {
                     _app = FirebaseApp.DefaultInstance;
+                    _auth = FirebaseAuth.DefaultInstance;
+
+                    return true;
                 }
-                else
-                {
-                    Log.Print($"Could not resolve all Firebase dependencies: {dependencyStatus}");
-                }
+
+                Log.Print($"Could not resolve all Firebase dependencies: {dependencyStatus}");
+
+                return false;
             });
 
-            _auth = FirebaseAuth.DefaultInstance;
+            Log.Print("Check and fix dependencies all done.");
+
+            return true;
         }
 
         public void AnonymouslyAuth(FirebasePostActions actions = default)
@@ -102,6 +105,12 @@ namespace Managers
 
                 actions.OnSuccess?.Invoke();
             });
+        }
+
+        private void OnDestroy()
+        {
+            _auth.SignOut();
+            _auth.Dispose(true);
         }
     }
 }

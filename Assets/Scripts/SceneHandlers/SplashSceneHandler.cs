@@ -1,7 +1,9 @@
 using System;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Horang.HorangUnityLibrary.Modules.AudioModule;
+using Horang.HorangUnityLibrary.Utilities;
 using Managers;
 using TMPro;
 using UI;
@@ -16,9 +18,11 @@ namespace SceneHandlers
 		[SerializeField] private TMP_Text studioName;
 		[SerializeField] private TMP_Text studioText;
 
-		private void Start()
+		private async void Start()
 		{
 			Application.targetFrameRate = 120;
+
+			await UniTask.WaitUntil(() => FirebaseManager.Instance.CheckDependencies());
 
 			Animation();
 
@@ -35,12 +39,7 @@ namespace SceneHandlers
 			studioName.DOText("Horang", 1.0f)
 				.From(string.Empty)
 				.SetEase(Ease.Linear)
-				.OnComplete(Auth);
-		}
-
-		private void Auth()
-		{
-			FirebaseManager.Instance.AnonymouslyAuth(new FirebaseManager.FirebasePostActions(onSuccess: ShowStudio, onCanceled: OnCanceled, onFailed: OnFailed));
+				.OnComplete(ShowStudio);
 		}
 
 		private void ShowStudio()
@@ -60,7 +59,13 @@ namespace SceneHandlers
 
 				FullFadeManager.Instance.FadeOut(() =>
 				{
-					SceneManager.LoadSceneAsync(1).ToUniTask();
+					var postActions = new FirebaseManager.FirebasePostActions(
+						onSuccess: () => SceneManager.LoadSceneAsync(1).ToUniTask(),
+						onCanceled: OnCanceled,
+						onFailed: OnFailed
+					);
+
+					FirebaseManager.Instance.AnonymouslyAuth(postActions);
 				});
 			}
 			catch (Exception e)
