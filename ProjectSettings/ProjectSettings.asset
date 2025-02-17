@@ -140,7 +140,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.0.04001
+  bundleVersion: 0.1.8001
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -164,7 +164,7 @@ PlayerSettings:
   androidMinAspectRatio: 1
   applicationIdentifier:
     Android: com.Horang.ProjectR
-    Standalone: com.DefaultCompany.2D-URP
+    Standalone: com.Horang.Project-R
     iPhone: com.Horang.Project-R
   buildNumber:
     Standalone: 0
@@ -772,7 +772,7 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   scriptingDefineSymbols:
-    Android: DOTWEEN
+    Android: DOTWEEN;SHOW_LOG;USE_AUTH_EMULATOR
     EmbeddedLinux: DOTWEEN
     GameCoreScarlett: DOTWEEN
     GameCoreXboxOne: DOTWEEN
