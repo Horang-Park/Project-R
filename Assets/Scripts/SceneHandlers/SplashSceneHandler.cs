@@ -16,9 +16,12 @@ namespace SceneHandlers
 	{
 		[SerializeField] private TMP_Text studioName;
 		[SerializeField] private TMP_Text studioText;
+		[SerializeField] private TMP_Text versionText;
 
 		private void Start()
 		{
+			versionText.text = $"v{Application.version}";
+
 			Application.targetFrameRate = 120;
 
 			FirebaseManager.Instance.CheckDependencies();
