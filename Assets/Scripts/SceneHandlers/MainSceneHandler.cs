@@ -15,7 +15,7 @@ namespace SceneHandlers
 			if (FirebaseManager.Instance.IsUserDisplayNameNullOrEmpty)
 			{
 				CommonCanvasManager.Instance.ShowInputFieldPopup(new InputFieldPopupController.Data(
-					Context: "Set your display user name.",
+					Context: "닉네임을 설정해 주십시오.",
 					ButtonAction: Send
 				));
 			}
@@ -29,7 +29,7 @@ namespace SceneHandlers
 			};
 
 			FirebaseManager.Instance.SetUserProfile(profile, new FirebaseManager.FirebasePostActions(
-				onSuccess: () => { CommonCanvasManager.Instance.ShowToast($"Display name set as [{inputFieldText}]"); },
+				onSuccess: () => { CommonCanvasManager.Instance.ShowToast($"닉네임이 [{inputFieldText}](으)로 변경되었습니다."); },
 				onCanceled: OnCanceled,
 				onFailed: OnFailed
 			));
@@ -38,8 +38,8 @@ namespace SceneHandlers
 		private static void OnCanceled()
 		{
 			CommonCanvasManager.Instance.ShowPopup(new PopupController.Data(
-				Context: "Canceled to update profile. Please re-lunch game.",
-				Title: "Update Profile Canceled.",
+				Context: "닉네임 설정이 취소되었습니다.\n게임을 재기동 해주십시오.",
+				Title: "닉네임 설정",
 				RightButtonAction: () => { Application.Quit(-400); },
 				UseOneButton: true));
 		}
@@ -47,8 +47,8 @@ namespace SceneHandlers
 		private static void OnFailed(string exceptionMessage)
 		{
 			CommonCanvasManager.Instance.ShowPopup(new PopupController.Data(
-				Context: "Failed to update profile. Please re-lunch game.",
-				Title: "Update Profile Failed.",
+				Context: "닉네임 설정을 실패했습니다.\n게임을 재기동 해주십시오.",
+				Title: "닉네임 설정",
 				RightButtonAction: () => { Application.Quit(-401); },
 				UseOneButton: true));
 		}

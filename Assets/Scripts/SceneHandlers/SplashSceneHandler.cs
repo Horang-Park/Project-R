@@ -76,8 +76,8 @@ namespace SceneHandlers
 		private static void OnCanceled()
 		{
 			CommonCanvasManager.Instance.ShowPopup(new PopupController.Data(
-				Context: "Canceled to login. Please re-lunch game.",
-				Title: "Login Canceled.",
+				Context: "로그인이 취소되었습니다. 게임을 재기동 해주십시오.",
+				Title: "로그인",
 				RightButtonAction: () => { Application.Quit(-400); },
 				UseOneButton: true));
 		}
@@ -85,8 +85,8 @@ namespace SceneHandlers
 		private static void OnFailed(string exceptionMessage)
 		{
 			CommonCanvasManager.Instance.ShowPopup(new PopupController.Data(
-				Context: "Failed to login. Please re-lunch game.",
-				Title: "Login Failed.",
+				Context: "로그인을 실패했습니다. 게임을 재기동 해주십시오.",
+				Title: "로그인",
 				RightButtonAction: () => { Application.Quit(-401); },
 				UseOneButton: true));
 		}

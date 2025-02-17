@@ -107,7 +107,7 @@ namespace Managers
 
         private void OnDestroy()
         {
-            _auth.SignOut();
+            // _auth.SignOut();
             _auth.Dispose(true);
         }
     }
