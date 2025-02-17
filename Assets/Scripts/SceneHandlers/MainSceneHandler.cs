@@ -1,3 +1,4 @@
+using System;
 using Firebase.Auth;
 using Managers;
 using UI;
@@ -26,13 +27,21 @@ namespace SceneHandlers
 			var profile = new UserProfile
 			{
 				DisplayName = inputFieldText,
+				PhotoUrl = new Uri("https://picsum.photos/50/50"),
 			};
 
 			FirebaseManager.Instance.SetUserProfile(profile, new FirebaseManager.FirebasePostActions(
-				onSuccess: () => { CommonCanvasManager.Instance.ShowToast($"닉네임이 [{inputFieldText}](으)로 변경되었습니다."); },
+				onSuccess: () => { OnSuccess(profile); },
 				onCanceled: OnCanceled,
 				onFailed: OnFailed
 			));
+		}
+
+		private static void OnSuccess(UserProfile userProfile)
+		{
+			CommonCanvasManager.Instance.ShowToast($"닉네임이 [{userProfile.DisplayName}](으)로 변경되었습니다.");
+
+			FirebaseManager.Instance.AddUser(userProfile.DisplayName, userProfile.PhotoUrl.AbsolutePath);
 		}
 
 		private static void OnCanceled()

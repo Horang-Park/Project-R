@@ -1,9 +1,11 @@
 using System;
 using Firebase;
 using Firebase.Auth;
+using Firebase.Database;
 using Firebase.Extensions;
 using Horang.HorangUnityLibrary.Foundation;
 using Horang.HorangUnityLibrary.Utilities;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Managers
@@ -24,10 +26,24 @@ namespace Managers
             }
         }
 
+        private struct User
+        {
+            public string DisplayName;
+            public string ProfileImageUrl;
+
+            public User(string displayName, string profileImageUrl)
+            {
+                DisplayName = displayName;
+                ProfileImageUrl = profileImageUrl;
+            }
+        }
+
         public bool IsUserDisplayNameNullOrEmpty => string.IsNullOrEmpty(_auth.CurrentUser.DisplayName) || string.IsNullOrWhiteSpace(_auth.CurrentUser.DisplayName);
+        public string CurrentUserUserId => _auth.CurrentUser.UserId;
 
         private FirebaseApp _app;
         private FirebaseAuth _auth;
+        private DatabaseReference _databaseReference;
 
         public void CheckDependencies()
         {
@@ -39,6 +55,7 @@ namespace Managers
                 {
                     _app = FirebaseApp.DefaultInstance;
                     _auth = FirebaseAuth.DefaultInstance;
+                    _databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
 
                     Log.Print("Check and fix dependencies all done.");
                 }
@@ -105,9 +122,16 @@ namespace Managers
             });
         }
 
+        public void AddUser(string displayName, string profileImageUrl)
+        {
+            var data = new User(displayName, profileImageUrl);
+            var json = JsonConvert.SerializeObject(data);
+
+            _databaseReference.Child("users").Child(_auth.CurrentUser.UserId).SetRawJsonValueAsync(json);
+        }
+
         private void OnDestroy()
         {
-            // _auth.SignOut();
             _auth.Dispose(true);
         }
     }
