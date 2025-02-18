@@ -38,10 +38,17 @@ namespace SceneHandlers
 
 		private void ShowStudioName()
 		{
+			var postActions = new FirebaseManager.FirebasePostActions(
+				onSuccess: ShowStudio,
+				onCanceled: OnCanceled,
+				onFailed: OnFailed
+			);
+
+			FirebaseManager.Instance.AnonymouslyAuth(postActions);
+
 			studioName.DOText("Horang", 1.0f)
 				.From(string.Empty)
-				.SetEase(Ease.Linear)
-				.OnComplete(ShowStudio);
+				.SetEase(Ease.Linear);
 		}
 
 		private void ShowStudio()
@@ -61,13 +68,7 @@ namespace SceneHandlers
 
 				FullFadeManager.Instance.FadeOut(() =>
 				{
-					var postActions = new FirebaseManager.FirebasePostActions(
-						onSuccess: () => SceneManager.LoadSceneAsync(1).ToUniTask(),
-						onCanceled: OnCanceled,
-						onFailed: OnFailed
-					);
-
-					FirebaseManager.Instance.AnonymouslyAuth(postActions);
+					SceneManager.LoadSceneAsync(1).ToUniTask();
 				});
 			}
 			catch (Exception e)
