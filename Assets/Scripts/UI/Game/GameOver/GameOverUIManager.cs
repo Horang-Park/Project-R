@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Horang.HorangUnityLibrary.Utilities;
@@ -41,12 +42,12 @@ namespace UI.Game.GameOver
 
 		private void Show()
 		{
+			FirebaseManager.Instance.GetHighScore(new FirebaseManager.GetValueFirebaseCallback(onSuccess: OnGetHighScore));
+
 			_canvasGroup.interactable = true;
 			_canvasGroup.blocksRaycasts = true;
 			_canvasGroup.DOFade(1.0f, 1.0f)
 				.OnComplete(ShowScore);
-
-			FirebaseManager.Instance.GetHighScore(new FirebaseManager.GetValueFirebaseCallback(onSuccess: OnGetHighScore));
 		}
 
 		private void ShowScore()
@@ -79,12 +80,23 @@ namespace UI.Game.GameOver
 
 		private static void OnGetHighScore(object value)
 		{
-			var currentScore = OneCycleRecordStore.Score.Value;
-			var storedScore = (long)value;
+			var currentScore = OneCycleRecordStore.Score.Value;;
+			string storedScore;
+
+			if (value is null)
+			{
+				Log.Print("Realtime Database's value is null -> Hard set to -1", LogPriority.Error);
+
+				storedScore = "-1";
+			}
+			else
+			{
+				storedScore = (string)value;
+			}
 
 			Log.Print($"current score: {currentScore} / stored score: {storedScore}");
 
-			if (currentScore <= storedScore)
+			if (currentScore <= int.Parse(storedScore))
 			{
 				Log.Print("Score not updated.");
 

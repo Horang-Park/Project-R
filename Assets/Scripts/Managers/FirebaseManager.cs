@@ -181,7 +181,7 @@ namespace Managers
             _databaseReference.Child("users")
                 .Child(_auth.CurrentUser.UserId)
                 .Child("HighScore")
-                .SetValueAsync(score)
+                .SetValueAsync(score.ToString())
                 .ContinueWithOnMainThread(task =>
                 {
                     if (task.IsCanceled)
