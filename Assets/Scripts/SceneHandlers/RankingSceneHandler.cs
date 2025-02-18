@@ -48,7 +48,7 @@ namespace SceneHandlers
                 scores.Add(new KeyValuePair<string, int>(displayName, int.Parse(scoreString)));
             }
 
-            _rankingUIManager.PushRankingData(scores);
+            _rankingUIManager.InjectData(scores);
         }
     }
 }

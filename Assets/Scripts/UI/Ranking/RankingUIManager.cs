@@ -8,7 +8,7 @@ namespace UI.Ranking
     {
         private List<KeyValuePair<string, int>> _currentRankingData;
 
-        public void PushRankingData(List<KeyValuePair<string, int>> data)
+        public void InjectData(List<KeyValuePair<string, int>> data)
         {
             _currentRankingData = data.OrderBy(kv => kv.Value).ToList();
         }
