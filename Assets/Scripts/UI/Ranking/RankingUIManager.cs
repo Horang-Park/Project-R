@@ -46,7 +46,7 @@ namespace UI.Ranking
 
             for (var rank = 0; rank < data.Count; rank++)
             {
-                _pieces[rank].InjectionData(rank, data[rank].Key, data[rank].Value);
+                _pieces[rank].InjectionData(rank + 1, data[rank].Key, data[rank].Value);
             }
         }
     }
