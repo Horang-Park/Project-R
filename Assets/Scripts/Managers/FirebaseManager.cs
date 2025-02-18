@@ -186,7 +186,7 @@ namespace Managers
                 {
                     if (task.IsCanceled)
                     {
-                        Log.Print("Add user canceled.");
+                        Log.Print("Set high score canceled.");
 
                         actions?.OnCanceled?.Invoke();
 
@@ -195,7 +195,7 @@ namespace Managers
 
                     if (task.IsFaulted)
                     {
-                        Debug.LogError("Add user encountered an error: " + task.Exception);
+                        Debug.LogError("Set high score encountered an error: " + task.Exception);
 
                         actions?.OnFailed?.Invoke(task.Exception?.Message);
 
@@ -216,7 +216,7 @@ namespace Managers
                 {
                     if (task.IsCanceled)
                     {
-                        Log.Print("Add user canceled.");
+                        Log.Print("Get high score canceled.");
 
                         actions?.OnCanceled?.Invoke();
 
@@ -225,7 +225,38 @@ namespace Managers
 
                     if (task.IsFaulted)
                     {
-                        Debug.LogError("Add user encountered an error: " + task.Exception);
+                        Debug.LogError("Get high score encountered an error: " + task.Exception);
+
+                        actions?.OnFailed?.Invoke(task.Exception?.Message);
+
+                        return;
+                    }
+
+                    if (task.IsCompleted)
+                    {
+                        actions?.OnSuccess?.Invoke(task.Result.Value);
+                    }
+                });
+        }
+
+        public void GetAllData(GetValueFirebaseCallback actions = null)
+        {
+            _databaseReference.Child("users")
+                .GetValueAsync()
+                .ContinueWithOnMainThread(task =>
+                {
+                    if (task.IsCanceled)
+                    {
+                        Log.Print("Get all data canceled.");
+
+                        actions?.OnCanceled?.Invoke();
+
+                        return;
+                    }
+
+                    if (task.IsFaulted)
+                    {
+                        Debug.LogError("Get all data encountered an error: " + task.Exception);
 
                         actions?.OnFailed?.Invoke(task.Exception?.Message);
 
@@ -249,6 +280,8 @@ namespace Managers
 
         private void OnDestroy()
         {
+            _app.Dispose(true);
+            _databaseReference.OnDisconnect();
             _auth.Dispose(true);
         }
     }
