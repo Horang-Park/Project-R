@@ -39,7 +39,6 @@ namespace Managers
         }
 
         public bool IsUserDisplayNameNullOrEmpty => string.IsNullOrEmpty(_auth.CurrentUser.DisplayName) || string.IsNullOrWhiteSpace(_auth.CurrentUser.DisplayName);
-        public string CurrentUserUserId => _auth.CurrentUser.UserId;
 
         private FirebaseApp _app;
         private FirebaseAuth _auth;

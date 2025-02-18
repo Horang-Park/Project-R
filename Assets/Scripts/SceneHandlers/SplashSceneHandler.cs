@@ -39,16 +39,18 @@ namespace SceneHandlers
 		private void ShowStudioName()
 		{
 			var postActions = new FirebaseManager.FirebasePostActions(
-				onSuccess: ShowStudio,
+				onSuccess: () =>
+				{
+					studioName.DOText("Horang", 0.5f)
+						.From(string.Empty)
+						.SetEase(Ease.Linear)
+						.OnComplete(ShowStudio);
+				},
 				onCanceled: OnCanceled,
 				onFailed: OnFailed
 			);
 
 			FirebaseManager.Instance.AnonymouslyAuth(postActions);
-
-			studioName.DOText("Horang", 1.0f)
-				.From(string.Empty)
-				.SetEase(Ease.Linear);
 		}
 
 		private void ShowStudio()
