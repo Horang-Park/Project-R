@@ -1,5 +1,4 @@
 using Managers;
-using Stores;
 using UniRx;
 using UnityEngine;
 
@@ -26,10 +25,6 @@ namespace Behaviour
 			DragInputManager.Instance.onPointerUpPositionEventProvider
 				.Subscribe(AddForce)
 				.AddTo(this);
-
-			OneCycleRecordStore.IsTimeOver
-				.Where(b => b)
-				.Subscribe(_ => OnTimeOver());
 		}
 
 		private void AddForce(Vector2 mouseUpPosition)
@@ -39,11 +34,6 @@ namespace Behaviour
 			_rigidbody2D.linearVelocity = forceVector * shotPower;
 			
 			// SoundManager.Instance.Play("Shoot");
-		}
-
-		private void OnTimeOver()
-		{
-			_rigidbody2D.linearVelocity = Vector2.zero;
 		}
 	}
 }

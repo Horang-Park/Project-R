@@ -7,7 +7,6 @@ using Managers;
 using TMPro;
 using UI;
 using UI.Common;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -22,9 +21,9 @@ namespace SceneHandlers
 		private void Start()
 		{
 #if UNITY_IOS
-			versionText.text = $"v{Application.version} ({PlayerSettings.iOS.buildNumber})";
+			versionText.text = $"v{Application.version}";
 #elif UNITY_ANDROID
-			versionText.text = $"v{Application.version} ({PlayerSettings.Android.bundleVersionCode})";
+			versionText.text = $"v{Application.version}";
 #endif
 
 			Application.targetFrameRate = 120;
