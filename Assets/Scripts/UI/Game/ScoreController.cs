@@ -27,8 +27,6 @@ namespace UI
 
 		private void ScoreUpdate(int score)
 		{
-			Log.Print($"Score: {score}");
-
 			_text.DOKill();
 			_text.DOCounter(_currentValue, score, 0.3f, true, CultureInfo.CurrentCulture)
 				.SetEase(Ease.OutQuint)

@@ -86,8 +86,12 @@ namespace UI.Game.GameOver
 
 			if (currentScore <= storedScore)
 			{
+				Log.Print("Score not updated.");
+
 				return;
 			}
+
+			Log.Print("Score updated.");
 
 			FirebaseManager.Instance.SetHighScore(currentScore);
 		}
