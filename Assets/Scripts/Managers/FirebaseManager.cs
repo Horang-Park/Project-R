@@ -12,13 +12,18 @@ namespace Managers
 {
     public class FirebaseManager : MonoSingleton<FirebaseManager>
     {
-        public struct FirebasePostActions
+        #region Callback classes
+        public abstract class BaseFirebaseCallback
+        {
+            public Action OnCanceled;
+            public Action<string> OnFailed;
+        }
+
+        public class CommonFirebaseCallback : BaseFirebaseCallback
         {
             public readonly Action OnSuccess;
-            public readonly Action OnCanceled;
-            public readonly Action<string> OnFailed;
 
-            public FirebasePostActions(Action onSuccess, Action onCanceled = null, Action<string> onFailed = null)
+            public CommonFirebaseCallback(Action onSuccess, Action onCanceled = null, Action<string> onFailed = null)
             {
                 OnSuccess = onSuccess;
                 OnCanceled = onCanceled;
@@ -26,6 +31,20 @@ namespace Managers
             }
         }
 
+        public class GetValueFirebaseCallback : BaseFirebaseCallback
+        {
+            public readonly Action<object> OnSuccess;
+
+            public GetValueFirebaseCallback(Action<object> onSuccess, Action onCanceled = null, Action<string> onFailed = null)
+            {
+                OnSuccess = onSuccess;
+                OnCanceled = onCanceled;
+                OnFailed = onFailed;
+            }
+        }
+        #endregion
+
+        #region Serialize structures
         private struct User
         {
             public string DisplayName;
@@ -37,6 +56,7 @@ namespace Managers
                 ProfileImageUrl = profileImageUrl;
             }
         }
+        #endregion
 
         public bool IsUserDisplayNameNullOrEmpty => string.IsNullOrEmpty(_auth.CurrentUser.DisplayName) || string.IsNullOrWhiteSpace(_auth.CurrentUser.DisplayName);
 
@@ -65,7 +85,8 @@ namespace Managers
             });
         }
 
-        public void AnonymouslyAuth(FirebasePostActions actions = default)
+        #region Authentication functions
+        public void AnonymouslyAuth(CommonFirebaseCallback actions = null)
         {
             _auth.SignInAnonymouslyAsync().ContinueWithOnMainThread(task =>
             {
@@ -73,7 +94,7 @@ namespace Managers
                 {
                     Log.Print("SignInAnonymouslyAsync canceled.");
 
-                    actions.OnCanceled?.Invoke();
+                    actions?.OnCanceled?.Invoke();
 
                     return;
                 }
@@ -82,12 +103,12 @@ namespace Managers
                 {
                     Debug.LogError("SignInAnonymouslyAsync encountered an error: " + task.Exception);
 
-                    actions.OnFailed?.Invoke(task.Exception?.Message);
+                    actions?.OnFailed?.Invoke(task.Exception?.Message);
 
                     return;
                 }
 
-                actions.OnSuccess?.Invoke();
+                actions?.OnSuccess?.Invoke();
 
                 var result = task.Result;
 
@@ -95,7 +116,7 @@ namespace Managers
             });
         }
 
-        public void SetUserProfile(UserProfile profile, FirebasePostActions actions = default)
+        public void SetUserProfile(UserProfile profile, CommonFirebaseCallback actions = null)
         {
             _auth.CurrentUser.UpdateUserProfileAsync(profile).ContinueWithOnMainThread(task =>
             {
@@ -103,7 +124,7 @@ namespace Managers
                 {
                     Log.Print("UpdateUserProfileAsync canceled.");
 
-                    actions.OnCanceled?.Invoke();
+                    actions?.OnCanceled?.Invoke();
 
                     return;
                 }
@@ -112,22 +133,119 @@ namespace Managers
                 {
                     Debug.LogError("UpdateUserProfileAsync encountered an error: " + task.Exception);
 
-                    actions.OnFailed?.Invoke(task.Exception?.Message);
+                    actions?.OnFailed?.Invoke(task.Exception?.Message);
 
                     return;
                 }
 
-                actions.OnSuccess?.Invoke();
+                actions?.OnSuccess?.Invoke();
             });
         }
+        #endregion
 
-        public void AddUser(string displayName, string profileImageUrl)
+        #region Realtime database functions
+        public void AddUser(string displayName, string profileImageUrl, CommonFirebaseCallback actions = null)
         {
             var data = new User(displayName, profileImageUrl);
             var json = JsonConvert.SerializeObject(data);
 
-            _databaseReference.Child("users").Child(_auth.CurrentUser.UserId).SetRawJsonValueAsync(json);
+            _databaseReference.Child("users")
+                .Child(_auth.CurrentUser.UserId)
+                .SetRawJsonValueAsync(json)
+                .ContinueWithOnMainThread(task =>
+                {
+                    if (task.IsCanceled)
+                    {
+                        Log.Print("Add user canceled.");
+
+                        actions?.OnCanceled?.Invoke();
+
+                        return;
+                    }
+
+                    if (task.IsFaulted)
+                    {
+                        Debug.LogError("Add user encountered an error: " + task.Exception);
+
+                        actions?.OnFailed?.Invoke(task.Exception?.Message);
+
+                        return;
+                    }
+
+                    actions?.OnSuccess?.Invoke();
+                });
         }
+
+        public void SetHighScore(int score, CommonFirebaseCallback actions = null)
+        {
+            _databaseReference.Child("users")
+                .Child(_auth.CurrentUser.UserId)
+                .Child("HighScore")
+                .SetValueAsync(score)
+                .ContinueWithOnMainThread(task =>
+                {
+                    if (task.IsCanceled)
+                    {
+                        Log.Print("Add user canceled.");
+
+                        actions?.OnCanceled?.Invoke();
+
+                        return;
+                    }
+
+                    if (task.IsFaulted)
+                    {
+                        Debug.LogError("Add user encountered an error: " + task.Exception);
+
+                        actions?.OnFailed?.Invoke(task.Exception?.Message);
+
+                        return;
+                    }
+
+                    actions?.OnSuccess?.Invoke();
+                });
+        }
+
+        public void GetHighScore(GetValueFirebaseCallback actions = null)
+        {
+            _databaseReference.Child("users")
+                .Child(_auth.CurrentUser.UserId)
+                .Child("HighScore")
+                .GetValueAsync()
+                .ContinueWithOnMainThread(task =>
+                {
+                    if (task.IsCanceled)
+                    {
+                        Log.Print("Add user canceled.");
+
+                        actions?.OnCanceled?.Invoke();
+
+                        return;
+                    }
+
+                    if (task.IsFaulted)
+                    {
+                        Debug.LogError("Add user encountered an error: " + task.Exception);
+
+                        actions?.OnFailed?.Invoke(task.Exception?.Message);
+
+                        return;
+                    }
+
+                    if (task.IsCompleted)
+                    {
+                        actions?.OnSuccess?.Invoke(task.Result.Value);
+                    }
+                });
+        }
+        #endregion
+
+        #region Test functions
+        public void SignOut()
+        {
+            _auth.SignOut();
+        }
+        #endregion
 
         private void OnDestroy()
         {

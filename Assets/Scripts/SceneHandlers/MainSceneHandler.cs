@@ -30,7 +30,7 @@ namespace SceneHandlers
 				PhotoUrl = new Uri("https://picsum.photos/50/50"),
 			};
 
-			FirebaseManager.Instance.SetUserProfile(profile, new FirebaseManager.FirebasePostActions(
+			FirebaseManager.Instance.SetUserProfile(profile, new FirebaseManager.CommonFirebaseCallback(
 				onSuccess: () => { OnSuccess(profile); },
 				onCanceled: OnCanceled,
 				onFailed: OnFailed
@@ -41,7 +41,7 @@ namespace SceneHandlers
 		{
 			CommonCanvasManager.Instance.ShowToast($"닉네임이 [{userProfile.DisplayName}](으)로 변경되었습니다.");
 
-			FirebaseManager.Instance.AddUser(userProfile.DisplayName, userProfile.PhotoUrl.AbsolutePath);
+			FirebaseManager.Instance.AddUser(userProfile.DisplayName, userProfile.PhotoUrl.ToString());
 		}
 
 		private static void OnCanceled()

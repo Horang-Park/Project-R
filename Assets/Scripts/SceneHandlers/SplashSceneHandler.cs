@@ -38,7 +38,7 @@ namespace SceneHandlers
 
 		private void ShowStudioName()
 		{
-			var postActions = new FirebaseManager.FirebasePostActions(
+			var postActions = new FirebaseManager.CommonFirebaseCallback(
 				onSuccess: () =>
 				{
 					studioName.DOText("Horang", 0.5f)

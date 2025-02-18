@@ -1,5 +1,4 @@
 using UniRx;
-using UnityEngine;
 
 namespace Stores
 {

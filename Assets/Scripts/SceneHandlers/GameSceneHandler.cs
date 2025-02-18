@@ -1,3 +1,4 @@
+using System;
 using Horang.HorangUnityLibrary.Modules.CameraModule;
 using Stores;
 using UI;
@@ -10,13 +11,16 @@ namespace SceneHandlers
 		private void Awake()
 		{
 			CameraModule.OnInitialize();
-
-			OneCycleRecordStore.Flush();
 		}
 
 		private void Start()
 		{
 			FullFadeManager.Instance.FadeIn();
+		}
+
+		private void OnDestroy()
+		{
+			CameraModule.Dispose();
 		}
 	}
 }

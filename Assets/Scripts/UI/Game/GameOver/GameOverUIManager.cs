@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Horang.HorangUnityLibrary.Utilities;
 using Managers;
 using Stores;
 using TMPro;
@@ -44,6 +45,8 @@ namespace UI.Game.GameOver
 			_canvasGroup.blocksRaycasts = true;
 			_canvasGroup.DOFade(1.0f, 1.0f)
 				.OnComplete(ShowScore);
+
+			FirebaseManager.Instance.GetHighScore(new FirebaseManager.GetValueFirebaseCallback(onSuccess: OnGetHighScore));
 		}
 
 		private void ShowScore()
@@ -62,14 +65,31 @@ namespace UI.Game.GameOver
 				.From(new Vector2(0.0f, -480.0f));
 		}
 		
-		private void Back()
+		private static void Back()
 		{
 			DragInputManager.Instance.DisposeEvents();
 			
 			FullFadeManager.Instance.FadeOut(() =>
 			{
+				OneCycleRecordStore.Flush();
+
 				SceneManager.LoadSceneAsync(1).ToUniTask();
 			});
+		}
+
+		private static void OnGetHighScore(object value)
+		{
+			var currentScore = OneCycleRecordStore.Score.Value;
+			var storedScore = (long)value;
+
+			Log.Print($"current score: {currentScore} / stored score: {storedScore}");
+
+			if (currentScore <= storedScore)
+			{
+				return;
+			}
+
+			FirebaseManager.Instance.SetHighScore(currentScore);
 		}
 	}
 }
