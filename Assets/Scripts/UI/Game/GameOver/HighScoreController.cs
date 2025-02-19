@@ -17,14 +17,14 @@ namespace UI.Game.GameOver
             sequence.AppendCallback(() =>
             {
                 _logoParentCanvasGroup.DOFade(1.0f, 0.2f);
-                _logoParent.DOAnchorPosY(-50.0f, 0.3f).From(new Vector2(11.0f, -150.0f));
+                _logoParent.DOAnchorPosY(0.0f, 0.3f).From(new Vector2(0.0f, -100.0f));
             });
 
             sequence.AppendInterval(3.0f);
 
             sequence.AppendCallback(() =>
             {
-                _logoParent.DOAnchorPosY(100.0f, 0.2f).From(new Vector2(11.0f, -50.0f));
+                _logoParent.DOAnchorPosY(150.0f, 0.2f).From(new Vector2(0.0f, 0.0f));
                 _logoParentCanvasGroup.DOFade(0.0f, 0.3f);
             });
             sequence.Append(_canvasGroup.DOFade(0.0f, 0.5f));
