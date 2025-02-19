@@ -1,4 +1,3 @@
-using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Horang.HorangUnityLibrary.Utilities;
@@ -17,6 +16,7 @@ namespace UI.Game.GameOver
 		private CanvasGroup _canvasGroup;
 		private TMP_Text _score;
 		private Button _back;
+		private HighScoreController _highScoreController;
 
 		private void Awake()
 		{
@@ -26,6 +26,8 @@ namespace UI.Game.GameOver
 
 			var buttons = GetComponentsInChildren<Button>();
 			_back = buttons[0];
+
+			_highScoreController = GetComponentInChildren<HighScoreController>();
 		}
 
 		private void Start()
@@ -53,8 +55,8 @@ namespace UI.Game.GameOver
 		private void ShowScore()
 		{
 			_score.DOFade(1.0f, 1.0f);
-			_score.rectTransform.DOAnchorPosY(-400.0f, 1.0f)
-				.From(new Vector2(0.0f, -430.0f));
+			_score.rectTransform.DOAnchorPosY(-630.0f, 1.0f)
+				.From(new Vector2(0.0f, -660.0f));
 			_score.DOCounter(0, OneCycleRecordStore.Score.Value, 1.5f)
 				.OnComplete(ShowButtons);
 		}
@@ -78,7 +80,7 @@ namespace UI.Game.GameOver
 			});
 		}
 
-		private static void OnGetHighScore(object value)
+		private void OnGetHighScore(object value)
 		{
 			var currentScore = OneCycleRecordStore.Score.Value;;
 			string storedScore;
@@ -104,6 +106,8 @@ namespace UI.Game.GameOver
 			}
 
 			Log.Print("Score updated.");
+
+			_highScoreController.Show();
 
 			FirebaseManager.Instance.SetHighScore(currentScore);
 		}
