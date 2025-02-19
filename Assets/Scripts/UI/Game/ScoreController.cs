@@ -1,12 +1,11 @@
 using System.Globalization;
 using DG.Tweening;
-using Horang.HorangUnityLibrary.Utilities;
 using Stores;
 using TMPro;
 using UniRx;
 using UnityEngine;
 
-namespace UI
+namespace UI.Game
 {
 	public class ScoreController : MonoBehaviour
 	{

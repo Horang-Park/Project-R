@@ -29,19 +29,20 @@ namespace Behaviour.PoolableObjects
 			ParticleEffectManager.Instance.ShowEffect("Enemy Die", col.transform.position);
 			// ModuleManager.Instance.GetModule<AudioModule>()!.Play("Enemy Die");
 
-			if (FeverManager.Instance.FeverTimeGageController.IsFeverTime is false)
+			if (OneCycleRecordStore.IsFeverTime.Value is false)
 			{
 				OneCycleRecordStore.KilledEnemiesForFeverTime.Value++;
 			}
 			else
 			{
 				OneCycleRecordStore.CurrentFeverMultiplier.Value += ConstantStore.FeverMultiplierIncreaseStep;
-				
-				FeverManager.Instance.FeverTimeGageController.AddValue = 1.0f / ConstantStore.RequireKilledEnemyCountToSetFeverMode;
+				OneCycleRecordStore.FeverTimeScore.Value += (int)(ConstantStore.DefaultKillScore * (OneCycleRecordStore.CurrentFeverMultiplier.Value  * 0.1f));
+
+				FeverManager.Instance.FeverTimeGageAddValue = 1.0f / ConstantStore.RequireKilledEnemyCountToSetFeverMode;
 			}
 			
 			OneCycleRecordStore.KilledEnemies.Value++;
-			
+
 			OneCycleRecordStore.Score.Value += (int)(ConstantStore.DefaultKillScore * (OneCycleRecordStore.CurrentFeverMultiplier.Value  * 0.1f));
 
 			_enemyPool.Release(this);

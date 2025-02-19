@@ -5,7 +5,11 @@ namespace Managers
 {
 	public class FeverManager : MonoSingleton<FeverManager>
 	{
-		public FeverTimeGageController FeverTimeGageController => _feverTimeGageController;
+		public float FeverTimeGageAddValue
+		{
+			set =>  _feverTimeGageController.AddValue = value;
+		}
+
 		private FeverTimeGageController _feverTimeGageController;
 
 		protected override void Awake()

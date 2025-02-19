@@ -49,10 +49,7 @@ namespace UI.Game.Fever
 			}
 		}
 
-		public bool IsFeverTime => _isFeverTime;
-
 		private Image _foreground;
-		private bool _isFeverTime;
 
 		private void Awake()
 		{
@@ -62,7 +59,7 @@ namespace UI.Game.Fever
 		private void Start()
 		{
 			Observable.EveryUpdate()
-				.Where(_ => _isFeverTime)
+				.Where(_ => OneCycleRecordStore.IsFeverTime.Value)
 				.Where(_ => _foreground.fillAmount > 0.0f)
 				.Subscribe(_ => Timer())
 				.AddTo(gameObject);
@@ -74,39 +71,24 @@ namespace UI.Game.Fever
 
 		private void Timer()
 		{
-			// var target = _foreground.fillAmount - ConstantStore.FeverTimeDecreaseStep * OneCycleRecordStore.CurrentFeverMultiplier.Value;
-
 			_foreground.fillAmount -= ConstantStore.FeverTimeDecreaseStep * OneCycleRecordStore.CurrentFeverMultiplier.Value * Time.deltaTime;
 			
-			if (_foreground.fillAmount > 0.0f || _isFeverTime is false)
+			if (_foreground.fillAmount > 0.0f || OneCycleRecordStore.IsFeverTime.Value is false)
 			{
 				return;
 			}
 
-			_isFeverTime = false;
-
+			OneCycleRecordStore.IsFeverTime.Value = false;
 			OneCycleRecordStore.CurrentFeverMultiplier.Value = ConstantStore.DefaultFeverMultiplier;
-
-			// _foreground.DOFillAmount(target, 0.987f)
-			// 	.SetEase(Ease.Linear)
-			// 	.OnComplete(() =>
-			// 	{
-			// 		if (_foreground.fillAmount > 0.0f || _isFeverTime is false)
-			// 		{
-			// 			return;
-			// 		}
-			//
-			// 		_isFeverTime = false;
-			//
-			// 		OneCycleRecordStore.CurrentFeverMultiplier.Value = ConstantStore.DefaultFeverMultiplier;
-			// 	});
+			OneCycleRecordStore.Score.Value += OneCycleRecordStore.FeverTimeScore.Value;
+			OneCycleRecordStore.FeverTimeScore.Value = 0;
 		}
 
 		private void KilledEnemiesForFeverTimeUpdater(int count)
 		{
 			var value = (float)count / ConstantStore.RequireKilledEnemyCountToSetFeverMode;
 
-			if (value < 1.0f && _isFeverTime is false)
+			if (value < 1.0f && OneCycleRecordStore.IsFeverTime.Value is false)
 			{
 				_foreground.DOFillAmount(value, 0.3f);
 
@@ -116,7 +98,7 @@ namespace UI.Game.Fever
 			_foreground.DOFillAmount(1.0f, 0.5f)
 				.OnComplete(() =>
 				{
-					_isFeverTime = true;
+					OneCycleRecordStore.IsFeverTime.Value = true;
 
 					OneCycleRecordStore.KilledEnemiesForFeverTime.Value = 0;
 				});
