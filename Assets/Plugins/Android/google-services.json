@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "307296965455",
+    "firebase_url": "https://project-r-c6d3f-default-rtdb.firebaseio.com",
+    "project_id": "project-r-c6d3f",
+    "storage_bucket": "project-r-c6d3f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307296965455:android:030b8abc13ced47ff06b3a",
+        "android_client_info": {
+          "package_name": "com.Horang.ProjectR"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8hE0B2b8m2IBt2vDaPPNFoiCDxMhxCLs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
