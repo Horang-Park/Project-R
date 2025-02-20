@@ -38,7 +38,7 @@ namespace UI.Game
                 .OnComplete(() => _currentValue = score)
                 .OnKill(() =>
                 {
-                    _text.text = score.ToString("# ##0");
+                    _text.text = score.ToString("#0");
                     _currentValue = score;
                 });
         }
