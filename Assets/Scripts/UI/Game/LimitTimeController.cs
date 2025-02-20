@@ -21,6 +21,7 @@ namespace UI.Game
 		private void Start()
 		{
 			Observable.EveryUpdate()
+				.Where(_ => OneCycleRecordStore.IsCountdown.Value is false)
 				.Where(_ => OneCycleRecordStore.IsTimeOver.Value is false)
 				.Where(_ => FullFadeManager.Instance.IsFading.Value is false)
 				.ThrottleFirst(TimeSpan.FromMilliseconds(1000.0f))

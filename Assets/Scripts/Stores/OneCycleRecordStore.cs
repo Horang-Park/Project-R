@@ -11,6 +11,7 @@ namespace Stores
 		public static readonly IntReactiveProperty CurrentFeverMultiplier = new(ConstantStore.DefaultFeverMultiplier);
 		public static readonly BoolReactiveProperty IsTimeOver = new(false);
 		public static readonly BoolReactiveProperty IsFeverTime = new(false);
+		public static readonly BoolReactiveProperty IsCountdown = new(true);
 		
 		public static void Flush()
 		{
@@ -21,6 +22,7 @@ namespace Stores
 			CurrentFeverMultiplier.Value = ConstantStore.DefaultFeverMultiplier;
 			IsTimeOver.Value = false;
 			IsFeverTime.Value = false;
+			IsCountdown.Value = true;
 		}
 	}
 }
