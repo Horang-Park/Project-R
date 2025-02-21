@@ -34,7 +34,7 @@ namespace UI.Ranking
         {
             _rank.text = rank.ToString("000");
             _displayName.text = displayName;
-            _score.text = score.ToString("# ##0");
+            _score.text = score.ToString("#0");
         }
     }
 }

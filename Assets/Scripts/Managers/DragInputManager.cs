@@ -47,12 +47,24 @@ namespace Managers
 				.Subscribe(_ => MouseButtonUpUpdater())
 				.AddTo(gameObject);
 
-			OneCycleRecordStore.IsTimeOver
-				.Subscribe(isTimeOver => _blockInput = isTimeOver)
-				.AddTo(this);
+			OneCycleRecordStore.IsCountdown
+				.Subscribe(isCountdown =>
+				{
+					_blockInput = isCountdown;
 
-			FullFadeManager.Instance.IsFading
-				.Subscribe(isFading => _blockInput = isFading)
+					if (isCountdown)
+					{
+						return;
+					}
+
+					OneCycleRecordStore.IsTimeOver
+						.Subscribe(isTimeOver => _blockInput = isTimeOver)
+						.AddTo(this);
+
+					FullFadeManager.Instance.IsFading
+						.Subscribe(isFading => _blockInput = isFading)
+						.AddTo(this);
+				})
 				.AddTo(this);
 		}
 

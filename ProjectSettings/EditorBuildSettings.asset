@@ -18,6 +18,8 @@ EditorBuildSettings:
     path: Assets/Scenes/2-2_Ranking.unity
     guid: cdd2eb41ec5354741827af8d604ddceb
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 30a4a078b382b494db7f1f2df290c315, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: f4abe22973c004ac79eefc39b6368d03, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+    com.unity.localization.settings: {fileID: 11400000, guid: b471b7d77dbf94b47bccc2d5dcd99dcc, type: 2}
   m_UseUCBPForAssetBundles: 0
