@@ -1,22 +1,16 @@
+using Horang.HorangUnityLibrary.Modules.CameraModule;
 using Horang.HorangUnityLibrary.Utilities.PlayerPrefs;
-using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Rendering.Universal;
 
 namespace UI.Main.Settings.Graphics
 {
-    public class UsePostProcessing : MonoBehaviour
+    public class UsePostProcessing : BaseGraphicController
     {
-        private Toggle _toggle;
-
-        public void Initialize()
-        {
-            _toggle = GetComponent<Toggle>();
-            _toggle.onValueChanged.AddListener(PostProcessing);
-        }
-
-        private void PostProcessing(bool isOn)
+        protected override void OnGraphicSetting(bool isOn)
         {
             SetPlayerPrefs.Int("Use Post Processing", isOn ? 1 : 0);
+
+            CameraModule.GetCamera("Main Camera").GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = isOn;
         }
     }
 }
