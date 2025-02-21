@@ -9,7 +9,7 @@ namespace UI.Main.Settings.Graphics
 
         private void Awake()
         {
-            _toggle = GetComponent<Toggle>();
+            _toggle = GetComponentInChildren<Toggle>();
             _toggle.onValueChanged.AddListener(OnGraphicSetting);
         }
 
