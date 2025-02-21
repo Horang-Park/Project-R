@@ -4,4 +4,4 @@
 * 개발기간: 2025년 1월 21일~작업중
 * 개발 기술: UniTask, UniRx, Firebase (Auth(Anonymously), Realtime Database), 개발한 유니티 라이브러리
 * 개발, 디자인, 사운드: 박창수(Horang-Park)
-* APK: https://drive.google.com/file/d/14Xnixqzlfur0kw0v5kvMRYJshlJSFsUZ/view?usp=sharing
+* APK: https://drive.google.com/file/d/1jpHH-LI4nUA9GdTdMbyWqoD1oADNY40t/view?usp=sharing
