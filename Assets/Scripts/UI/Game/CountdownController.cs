@@ -57,6 +57,8 @@ namespace UI.Game
                 OneCycleRecordStore.IsCountdown.Value = false;
 
                 _canvasGroup.DOFade(0.0f, 0.3f);
+                _canvasGroup.blocksRaycasts = false;
+                _canvasGroup.interactable = false;
             }
         }
     }
