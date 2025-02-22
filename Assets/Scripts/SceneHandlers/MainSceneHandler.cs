@@ -1,5 +1,6 @@
 using System;
 using Firebase.Auth;
+using Horang.HorangUnityLibrary.Modules.AudioModule;
 using Horang.HorangUnityLibrary.Modules.CameraModule;
 using Managers;
 using UI;
@@ -13,6 +14,13 @@ namespace SceneHandlers
 		private void Awake()
 		{
 			CameraModule.OnInitialize();
+
+			if (AudioModule.IsAudioPlaying("main_bgm"))
+			{
+				return;
+			}
+
+			AudioModule.Play("main_bgm");
 		}
 
 		private void OnDestroy()

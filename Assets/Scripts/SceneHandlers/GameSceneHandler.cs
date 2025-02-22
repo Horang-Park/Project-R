@@ -1,3 +1,4 @@
+using Horang.HorangUnityLibrary.Modules.AudioModule;
 using Horang.HorangUnityLibrary.Modules.CameraModule;
 using Horang.HorangUnityLibrary.Utilities.PlayerPrefs;
 using UI;
@@ -25,6 +26,8 @@ namespace SceneHandlers
 		private void OnDestroy()
 		{
 			CameraModule.Dispose();
+
+			AudioModule.Stop("in_game_bgm");
 		}
 	}
 }

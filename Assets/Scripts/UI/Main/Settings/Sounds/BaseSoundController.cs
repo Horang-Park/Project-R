@@ -21,13 +21,13 @@ namespace UI.Main.Settings.Sounds
         protected virtual void Start()
         {
             _slider.onValueChanged.AddListener(SetVolume);
-            _slider.Subscribe(ShowPercentage);
+            _slider.onValueChanged.AddListener(ShowPercentage);
             _onOff.onValueChanged.AddListener(OnSound);
         }
 
         private void OnDestroy()
         {
-            _slider.Unsubscribe(ShowPercentage);
+            _slider.onValueChanged.RemoveListener(ShowPercentage);
         }
 
         protected abstract void OnSound(bool isOn);
