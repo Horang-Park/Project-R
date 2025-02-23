@@ -1,3 +1,4 @@
+using Horang.HorangUnityLibrary.Modules.AudioModule;
 using Managers;
 using UniRx;
 using UnityEngine;
@@ -32,8 +33,8 @@ namespace Behaviour
 			var forceVector = (_mouseDownPosition - mouseUpPosition);
 
 			_rigidbody2D.linearVelocity = forceVector * shotPower;
-			
-			// SoundManager.Instance.Play("Shoot");
+
+			AudioModule.Play("shot");
 		}
 	}
 }

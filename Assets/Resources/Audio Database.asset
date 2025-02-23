@@ -117,3 +117,42 @@ MonoBehaviour:
       samplingFrequency: 44100
       sampleCount: 78553
       instanceId: 82868
+  - name: enemy_kill
+    audioClip: {fileID: 8300000, guid: af99f2dcad8cc4c17bb000531e3c1a66, type: 3}
+    audioPlayType: 2
+    audioClipVolume: 1
+    audioClipPan: 0
+    audioClipAdditionalData:
+      length: 1.2901814
+      extension: .wav
+      importPath: Assets/Asset Resources/Audios/SFX/enemy_kill.wav
+      channel: 2
+      samplingFrequency: 44100
+      sampleCount: 56897
+      instanceId: 127504
+  - name: shot
+    audioClip: {fileID: 8300000, guid: 9bd818dd0097749eda9c4ead91fdd9f6, type: 3}
+    audioPlayType: 2
+    audioClipVolume: 1
+    audioClipPan: 0
+    audioClipAdditionalData:
+      length: 2.142857
+      extension: .wav
+      importPath: Assets/Asset Resources/Audios/SFX/shot.wav
+      channel: 2
+      samplingFrequency: 44100
+      sampleCount: 94500
+      instanceId: 127502
+  - name: slider
+    audioClip: {fileID: 8300000, guid: 0ccf4f8fbecbb4508929c20cae6e3b48, type: 3}
+    audioPlayType: 3
+    audioClipVolume: 1
+    audioClipPan: 0
+    audioClipAdditionalData:
+      length: 0.07589569
+      extension: .wav
+      importPath: Assets/Asset Resources/Audios/SFX/slider.wav
+      channel: 2
+      samplingFrequency: 44100
+      sampleCount: 3347
+      instanceId: 130018
