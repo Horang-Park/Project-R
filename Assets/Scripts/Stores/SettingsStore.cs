@@ -22,22 +22,30 @@ namespace Stores
             if (isFirstLaunch.Equals(int.MaxValue) || isFirstLaunch.Equals(1))
             {
                 SetPlayerPrefs.Int(ConstantStore.IsFirstLaunchSaveKey, 0);
+
+                // 기본 값 세팅
+                SetPlayerPrefs.Float(ConstantStore.BgmVolumeSaveKey, 0.8f);
+                SetPlayerPrefs.Int(ConstantStore.BgmOnOffSaveKey, 1);
+                SetPlayerPrefs.Float(ConstantStore.SfxVolumeSaveKey, 0.8f);
+                SetPlayerPrefs.Int(ConstantStore.SfxOnOffSaveKey, 1);
+
+                SetPlayerPrefs.Int(ConstantStore.UseHalfRenderScaleSaveKey, 0);
+                SetPlayerPrefs.Int(ConstantStore.UseAntialiasingSaveKey, 1);
+                SetPlayerPrefs.Int(ConstantStore.UsePostProcessingSaveKey, 1);
             }
-            else
-            {
-                BgmVolume = GetPlayerPrefs.Float(ConstantStore.BgmVolumeSaveKey);
-                IsBgmUse = GetPlayerPrefs.Int(ConstantStore.BgmOnOffSaveKey).Equals(1);
-                SfxVolume = GetPlayerPrefs.Float(ConstantStore.SfxVolumeSaveKey);
-                IsSfxUse = GetPlayerPrefs.Int(ConstantStore.SfxOnOffSaveKey).Equals(1);
 
-                Log.Print($"bgm volume: {BgmVolume} / is bgm use: {IsBgmUse} / sfx volume: {SfxVolume} / is sfx use: {IsSfxUse}");
+            BgmVolume = GetPlayerPrefs.Float(ConstantStore.BgmVolumeSaveKey);
+            IsBgmUse = GetPlayerPrefs.Int(ConstantStore.BgmOnOffSaveKey).Equals(1);
+            SfxVolume = GetPlayerPrefs.Float(ConstantStore.SfxVolumeSaveKey);
+            IsSfxUse = GetPlayerPrefs.Int(ConstantStore.SfxOnOffSaveKey).Equals(1);
 
-                IsAntialiasingUse = GetPlayerPrefs.Int(ConstantStore.UseAntialiasingSaveKey).Equals(1);
-                IsHalfRenderScaleUse = GetPlayerPrefs.Int(ConstantStore.UseHalfRenderScaleSaveKey).Equals(1);
-                IsPostProcessingUse = GetPlayerPrefs.Int(ConstantStore.UsePostProcessingSaveKey).Equals(1);
+            Log.Print($"bgm volume: {BgmVolume} / is bgm use: {IsBgmUse} / sfx volume: {SfxVolume} / is sfx use: {IsSfxUse}");
 
-                Log.Print($"is half render scale use: {IsHalfRenderScaleUse} / is antialiasing use: {IsAntialiasingUse} / is post processing use: {IsPostProcessingUse}");
-            }
+            IsHalfRenderScaleUse = GetPlayerPrefs.Int(ConstantStore.UseHalfRenderScaleSaveKey).Equals(1);
+            IsAntialiasingUse = GetPlayerPrefs.Int(ConstantStore.UseAntialiasingSaveKey).Equals(1);
+            IsPostProcessingUse = GetPlayerPrefs.Int(ConstantStore.UsePostProcessingSaveKey).Equals(1);
+
+            Log.Print($"is half render scale use: {IsHalfRenderScaleUse} / is antialiasing use: {IsAntialiasingUse} / is post processing use: {IsPostProcessingUse}");
 
             SetLocalAudioSettings();
         }
