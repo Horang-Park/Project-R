@@ -890,6 +890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64514ecb4ba84257b9a45df422f5201a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  universalRenderPipelineAsset: {fileID: 11400000, guid: 681886c5eb7344803b6206f758bf0b1c, type: 2}
   studioName: {fileID: 165541126}
   studioText: {fileID: 1444074623}
   versionText: {fileID: 1022990698}

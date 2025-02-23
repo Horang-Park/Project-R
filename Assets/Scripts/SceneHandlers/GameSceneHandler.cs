@@ -1,6 +1,7 @@
 using Horang.HorangUnityLibrary.Modules.AudioModule;
 using Horang.HorangUnityLibrary.Modules.CameraModule;
 using Horang.HorangUnityLibrary.Utilities.PlayerPrefs;
+using Stores;
 using UI;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -13,9 +14,7 @@ namespace SceneHandlers
 		{
 			CameraModule.OnInitialize();
 
-			var usePostProcessing = GetPlayerPrefs.Int("Use Post Processing");
-
-			CameraModule.GetCamera("Main Camera").GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = usePostProcessing.Equals(1);
+			CameraModule.GetCamera("Main Camera").GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = SettingsStore.IsPostProcessingUse;
 		}
 
 		private void Start()

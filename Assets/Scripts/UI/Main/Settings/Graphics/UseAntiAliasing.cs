@@ -1,4 +1,5 @@
 using Horang.HorangUnityLibrary.Utilities.PlayerPrefs;
+using Stores;
 using UnityEngine.Rendering.Universal;
 
 namespace UI.Main.Settings.Graphics
@@ -15,9 +16,14 @@ namespace UI.Main.Settings.Graphics
             _injectedRenderPipeline = renderPipelineAsset;
         }
 
+        public override void OnShowSettings()
+        {
+            Toggle.isOn = SettingsStore.IsAntialiasingUse;
+        }
+
         protected override void OnGraphicSetting(bool isOn)
         {
-            SetPlayerPrefs.Int("Use Antialiasing", isOn ? 1 : 0);
+            SetPlayerPrefs.Int(ConstantStore.UseAntialiasingSaveKey, isOn ? 1 : 0);
 
             _injectedRenderPipeline.msaaSampleCount = isOn ? OnMsaa : OffMsaa;
         }

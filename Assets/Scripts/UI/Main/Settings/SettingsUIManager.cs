@@ -29,6 +29,13 @@ namespace UI.Main.Settings
 
         public void Show()
         {
+            _bgmController.OnShowSettings();
+            _sfxController.OnShowSettings();
+
+            _useHalfRenderScale.OnShowSettings();
+            _useAntiAliasing.OnShowSettings();
+            _usePostProcessing.OnShowSettings();
+
             _canvasGroup.DOFade(1.0f, 0.3f)
                 .From(0.0f)
                 .OnPlay(() =>
@@ -66,6 +73,8 @@ namespace UI.Main.Settings
 
         private void Exit()
         {
+            PlayerPrefs.Save();
+
             _canvasGroup.DOFade(0.0f, 0.2f)
                 .From(1.0f)
                 .OnPlay(() =>

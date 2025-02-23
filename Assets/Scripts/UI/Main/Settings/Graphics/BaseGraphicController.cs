@@ -5,14 +5,15 @@ namespace UI.Main.Settings.Graphics
 {
     public abstract class BaseGraphicController : MonoBehaviour
     {
-        private Toggle _toggle;
+        protected Toggle Toggle;
 
         private void Awake()
         {
-            _toggle = GetComponentInChildren<Toggle>();
-            _toggle.onValueChanged.AddListener(OnGraphicSetting);
+            Toggle = GetComponentInChildren<Toggle>();
+            Toggle.onValueChanged.AddListener(OnGraphicSetting);
         }
 
+        public abstract void OnShowSettings();
         protected abstract void OnGraphicSetting(bool isOn);
     }
 }

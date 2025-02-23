@@ -3,17 +3,23 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Horang.HorangUnityLibrary.Modules.AudioModule;
 using Horang.HorangUnityLibrary.Utilities;
+using Horang.HorangUnityLibrary.Utilities.PlayerPrefs;
 using Managers;
+using Stores;
 using TMPro;
 using UI;
 using UI.Common;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 namespace SceneHandlers
 {
 	public class SplashSceneHandler : MonoBehaviour
 	{
+		[Header("Resources")]
+		[SerializeField] private UniversalRenderPipelineAsset universalRenderPipelineAsset;
+
 		[SerializeField] private TMP_Text studioName;
 		[SerializeField] private TMP_Text studioText;
 		[SerializeField] private TMP_Text versionText;
@@ -25,14 +31,16 @@ namespace SceneHandlers
 #elif UNITY_ANDROID
 			versionText.text = $"v{Application.version}";
 #endif
+			AudioModule.OnInitialize();
+
+			SettingsStore.GetLocalSettings();
+			SetLocalGraphicSettings();
 
 			Application.targetFrameRate = 120;
 
 			FirebaseManager.Instance.CheckDependencies();
 
 			Animation();
-
-			AudioModule.OnInitialize();
 		}
 
 		private void Animation()
@@ -99,6 +107,12 @@ namespace SceneHandlers
 				Title: "로그인",
 				RightButtonAction: () => { Application.Quit(-401); },
 				UseOneButton: true));
+		}
+
+		private void SetLocalGraphicSettings()
+		{
+			universalRenderPipelineAsset.msaaSampleCount = SettingsStore.IsAntialiasingUse ? 4 : 1;
+			universalRenderPipelineAsset.renderScale = SettingsStore.IsHalfRenderScaleUse ? 0.7f : 1.0f;
 		}
 	}
 }
