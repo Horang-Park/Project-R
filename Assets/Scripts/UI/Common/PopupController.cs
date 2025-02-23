@@ -13,8 +13,8 @@ namespace UI.Common
         {
             public string Title { get; } = string.IsNullOrEmpty(Title) || string.IsNullOrWhiteSpace(Title) ? "Project R" : Title;
             public string Context { get; } = string.IsNullOrEmpty(Context) || string.IsNullOrWhiteSpace(Context) ? "Context is empty" : Context;
-            public string LeftButtonCaption { get; } = string.IsNullOrEmpty(LeftButtonCaption) || string.IsNullOrWhiteSpace(LeftButtonCaption) ? "No" : LeftButtonCaption;
-            public string RightButtonCaption { get; } = string.IsNullOrEmpty(RightButtonCaption) || string.IsNullOrWhiteSpace(RightButtonCaption) ? "Yes" : RightButtonCaption;
+            public string LeftButtonCaption { get; } = string.IsNullOrEmpty(LeftButtonCaption) || string.IsNullOrWhiteSpace(LeftButtonCaption) ? "아니오" : LeftButtonCaption;
+            public string RightButtonCaption { get; } = string.IsNullOrEmpty(RightButtonCaption) || string.IsNullOrWhiteSpace(RightButtonCaption) ? "네" : RightButtonCaption;
             public Action LeftButtonAction { get; } = LeftButtonAction;
             public Action RightButtonAction { get; } = RightButtonAction;
             public bool UseOneButton { get; } = UseOneButton;

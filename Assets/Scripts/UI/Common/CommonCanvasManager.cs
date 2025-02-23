@@ -1,4 +1,5 @@
 using Horang.HorangUnityLibrary.Foundation;
+using Horang.HorangUnityLibrary.Modules.AudioModule;
 
 namespace UI.Common
 {
@@ -10,18 +11,24 @@ namespace UI.Common
 
 		public void ShowInputFieldPopup(InputFieldPopupController.Data popupContextData)
 		{
+			AudioModule.Play("notification");
+
 			_inputFieldPopupController.Put = popupContextData;
 			_inputFieldPopupController.Show();
 		}
 
 		public void ShowPopup(PopupController.Data popupContextData)
 		{
+			AudioModule.Play("notification");
+
 			_popupController.Put = popupContextData;
 			_popupController.Show();
 		}
 
 		public void ShowToast(string message)
 		{
+			AudioModule.Play("notification");
+
 			_topToastController.Put = message;
 			_topToastController.Show();
 		}

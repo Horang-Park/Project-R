@@ -127,7 +127,7 @@ namespace DG.Tweening
             TweenerCore<int, int, NoOptions> t = DOTween.To(() => v, x => {
                 v = x;
                 target.text = addThousandsSeparator
-                    ? v.ToString("# ##0", cInfo)
+                    ? v.ToString("#0", cInfo)
                     : v.ToString();
             }, endValue, duration);
             t.SetTarget(target);

@@ -33,9 +33,11 @@ namespace UI.Ranking
 
         public void InjectData(List<KeyValuePair<string, int>> data)
         {
-            Array.Sort(data.ToArray(), (pair, valuePair) => valuePair.Value.CompareTo(pair.Value));
+            var arrayData = data.ToArray();
 
-            for (var instantiateTimes = _pieces.Count; instantiateTimes < data.Count; instantiateTimes++)
+            Array.Sort(arrayData, (pair, valuePair) => valuePair.Value.CompareTo(pair.Value));
+
+            for (var instantiateTimes = _pieces.Count; instantiateTimes < arrayData.Length; instantiateTimes++)
             {
                 var component = Instantiate(rankingPiecePrefab, instantiateTargetParent).GetComponent<RankingPiece>();
 
@@ -44,9 +46,9 @@ namespace UI.Ranking
                 _pieces.Add(component);
             }
 
-            for (var rank = 0; rank < data.Count; rank++)
+            for (var rank = 0; rank < arrayData.Length; rank++)
             {
-                _pieces[rank].InjectionData(rank + 1, data[rank].Key, data[rank].Value);
+                _pieces[rank].InjectionData(rank + 1, arrayData[rank].Key, arrayData[rank].Value);
             }
         }
     }

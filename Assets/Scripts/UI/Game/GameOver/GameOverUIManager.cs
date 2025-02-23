@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Horang.HorangUnityLibrary.Modules.AudioModule;
 using Horang.HorangUnityLibrary.Utilities;
 using Managers;
 using Stores;
@@ -44,6 +45,8 @@ namespace UI.Game.GameOver
 
 		private void Show()
 		{
+			OnTimeOver();
+
 			FirebaseManager.Instance.GetHighScore(new FirebaseManager.GetValueFirebaseCallback(onSuccess: OnGetHighScore));
 
 			_canvasGroup.interactable = true;
@@ -110,6 +113,14 @@ namespace UI.Game.GameOver
 			_highScoreController.Show();
 
 			FirebaseManager.Instance.SetHighScore(currentScore);
+		}
+
+		private void OnTimeOver()
+		{
+			OneCycleRecordStore.IsFeverTime.Value = false;
+			OneCycleRecordStore.CurrentFeverMultiplier.Value = ConstantStore.DefaultFeverMultiplier;
+			OneCycleRecordStore.Score.Value += OneCycleRecordStore.FeverTimeScore.Value;
+			OneCycleRecordStore.FeverTimeScore.Value = 0;
 		}
 	}
 }

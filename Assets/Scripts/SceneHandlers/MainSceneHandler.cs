@@ -1,17 +1,40 @@
 using System;
 using Firebase.Auth;
+using Horang.HorangUnityLibrary.Modules.AudioModule;
+using Horang.HorangUnityLibrary.Modules.CameraModule;
 using Managers;
+using Stores;
 using UI;
 using UI.Common;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace SceneHandlers
 {
 	public class MainSceneHandler : MonoBehaviour
 	{
+		private void Awake()
+		{
+			CameraModule.OnInitialize();
+
+			if (AudioModule.IsAudioPlaying("main_bgm"))
+			{
+				return;
+			}
+
+			AudioModule.Play("main_bgm");
+		}
+
+		private void OnDestroy()
+		{
+			CameraModule.Dispose();
+		}
+
 		private void Start()
 		{
 			FullFadeManager.Instance.FadeIn();
+
+			CameraModule.GetCamera("Main Camera").GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = SettingsStore.IsPostProcessingUse;
 
 			if (FirebaseManager.Instance.IsUserDisplayNameNullOrEmpty)
 			{

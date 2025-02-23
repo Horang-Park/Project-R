@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Horang.HorangUnityLibrary.Modules.AudioModule;
 using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,6 +27,8 @@ namespace UI.Main
 		{
 			FullFadeManager.Instance.FadeOut(() =>
 			{
+				AudioModule.Stop("main_bgm");
+
 				SceneManager.LoadSceneAsync(2).ToUniTask();
 			});
 		}

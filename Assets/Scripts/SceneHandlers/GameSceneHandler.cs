@@ -1,8 +1,10 @@
-using System;
+using Horang.HorangUnityLibrary.Modules.AudioModule;
 using Horang.HorangUnityLibrary.Modules.CameraModule;
+using Horang.HorangUnityLibrary.Utilities.PlayerPrefs;
 using Stores;
 using UI;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace SceneHandlers
 {
@@ -11,6 +13,8 @@ namespace SceneHandlers
 		private void Awake()
 		{
 			CameraModule.OnInitialize();
+
+			CameraModule.GetCamera("Main Camera").GetComponent<UniversalAdditionalCameraData>().renderPostProcessing = SettingsStore.IsPostProcessingUse;
 		}
 
 		private void Start()
@@ -21,6 +25,8 @@ namespace SceneHandlers
 		private void OnDestroy()
 		{
 			CameraModule.Dispose();
+
+			AudioModule.Stop("in_game_bgm");
 		}
 	}
 }

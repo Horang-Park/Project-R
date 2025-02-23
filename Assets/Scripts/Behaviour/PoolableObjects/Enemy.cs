@@ -1,3 +1,4 @@
+using Horang.HorangUnityLibrary.Modules.AudioModule;
 using Managers;
 using Stores;
 using UnityEngine;
@@ -27,7 +28,7 @@ namespace Behaviour.PoolableObjects
 			}
 
 			ParticleEffectManager.Instance.ShowEffect("Enemy Die", col.transform.position);
-			// ModuleManager.Instance.GetModule<AudioModule>()!.Play("Enemy Die");
+			AudioModule.Play("enemy_kill");
 
 			if (OneCycleRecordStore.IsFeverTime.Value is false)
 			{
