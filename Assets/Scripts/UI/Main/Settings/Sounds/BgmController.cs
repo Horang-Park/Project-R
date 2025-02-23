@@ -14,6 +14,8 @@ namespace UI.Main.Settings.Sounds
 
         protected override void SetVolume(float volume)
         {
+            AudioModule.Volume("slider", volume);
+
             AudioModule.VolumeByCategory(AudioDataType.AudioPlayType.BGM, volume);
 
             SetPlayerPrefs.Float(ConstantStore.BgmVolumeSaveKey, volume);

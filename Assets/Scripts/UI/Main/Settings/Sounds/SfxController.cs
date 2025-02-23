@@ -14,6 +14,8 @@ namespace UI.Main.Settings.Sounds
 
         protected override void SetVolume(float volume)
         {
+            AudioModule.Volume("slider", volume);
+
             AudioModule.VolumeByCategory(AudioDataType.AudioPlayType.OneshotSfx, volume);
             AudioModule.VolumeByCategory(AudioDataType.AudioPlayType.LoopSfx, volume);
 
