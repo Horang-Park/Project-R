@@ -1,4 +1,5 @@
 using Horang.HorangUnityLibrary.Modules.AudioModule;
+using Horang.HorangUnityLibrary.Utilities;
 using Horang.HorangUnityLibrary.Utilities.PlayerPrefs;
 
 namespace Stores
@@ -21,9 +22,13 @@ namespace Stores
             SfxVolume = GetPlayerPrefs.Float(ConstantStore.SfxVolumeSaveKey);
             IsSfxUse = GetPlayerPrefs.Int(ConstantStore.SfxOnOffSaveKey).Equals(1);
 
+            Log.Print($"bgm volume: {BgmVolume} / is bgm use: {IsBgmUse} / sfx volume: {SfxVolume} / is sfx use: {IsSfxUse}");
+
             IsAntialiasingUse = GetPlayerPrefs.Int(ConstantStore.UseAntialiasingSaveKey).Equals(1);
             IsHalfRenderScaleUse = GetPlayerPrefs.Int(ConstantStore.UseHalfRenderScaleSaveKey).Equals(1);
             IsPostProcessingUse = GetPlayerPrefs.Int(ConstantStore.UsePostProcessingSaveKey).Equals(1);
+
+            Log.Print($"is half render scale use: {IsHalfRenderScaleUse} / is antialiasing use: {IsAntialiasingUse} / is post processing use: {IsPostProcessingUse}");
 
             SetLocalAudioSettings();
         }

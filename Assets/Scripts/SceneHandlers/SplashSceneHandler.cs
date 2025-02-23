@@ -24,6 +24,11 @@ namespace SceneHandlers
 		[SerializeField] private TMP_Text studioText;
 		[SerializeField] private TMP_Text versionText;
 
+		private void Awake()
+		{
+			AudioModule.OnInitialize();
+		}
+
 		private void Start()
 		{
 #if UNITY_IOS
@@ -31,8 +36,6 @@ namespace SceneHandlers
 #elif UNITY_ANDROID
 			versionText.text = $"v{Application.version}";
 #endif
-			AudioModule.OnInitialize();
-
 			SettingsStore.GetLocalSettings();
 			SetLocalGraphicSettings();
 
