@@ -1,4 +1,6 @@
+using Horang.HorangUnityLibrary.Utilities.PlayerPrefs;
 using Managers;
+using Stores;
 using UI.Common;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,6 +29,8 @@ namespace UI.Main.Settings
 
                         FullFadeManager.Instance.FadeOut(() =>
                         {
+                            SetPlayerPrefs.Int(ConstantStore.IsFirstLaunchSaveKey, 1);
+
 #if UNITY_EDITOR
                             UnityEditor.EditorApplication.isPlaying = false;
 #else

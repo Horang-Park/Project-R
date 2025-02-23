@@ -1,5 +1,5 @@
-using System;
 using DG.Tweening;
+using UI.Main.Credit;
 using UI.Main.Settings.Graphics;
 using UI.Main.Settings.Sounds;
 using UnityEngine;
@@ -12,6 +12,8 @@ namespace UI.Main.Settings
     {
         [Header("Top Menu")]
         [SerializeField] private Button exitButton;
+        [Header("Contents")]
+        [SerializeField] private Button creditButton;
         [Header("Resources")]
         [SerializeField] private UniversalRenderPipelineAsset universalRenderPipelineAsset;
 
@@ -26,6 +28,8 @@ namespace UI.Main.Settings
         private UseHalfRenderScale _useHalfRenderScale;
         private UseAntiAliasing _useAntiAliasing;
         private UsePostProcessing _usePostProcessing;
+
+        private CreditUIManager _creditUIManager;
 
         public void Show()
         {
@@ -61,6 +65,8 @@ namespace UI.Main.Settings
             _useHalfRenderScale = GetComponentInChildren<UseHalfRenderScale>();
             _useAntiAliasing = GetComponentInChildren<UseAntiAliasing>();
             _usePostProcessing = GetComponentInChildren<UsePostProcessing>();
+
+            _creditUIManager = GetComponentInChildren<CreditUIManager>();
         }
 
         private void Start()
@@ -69,6 +75,8 @@ namespace UI.Main.Settings
 
             _useHalfRenderScale.Initialize(universalRenderPipelineAsset);
             _useAntiAliasing.Initialize(universalRenderPipelineAsset);
+
+            creditButton.onClick.AddListener(_creditUIManager.Show);
         }
 
         private void Exit()

@@ -17,18 +17,27 @@ namespace Stores
 
         public static void GetLocalSettings()
         {
-            BgmVolume = GetPlayerPrefs.Float(ConstantStore.BgmVolumeSaveKey);
-            IsBgmUse = GetPlayerPrefs.Int(ConstantStore.BgmOnOffSaveKey).Equals(1);
-            SfxVolume = GetPlayerPrefs.Float(ConstantStore.SfxVolumeSaveKey);
-            IsSfxUse = GetPlayerPrefs.Int(ConstantStore.SfxOnOffSaveKey).Equals(1);
+            var isFirstLaunch = GetPlayerPrefs.Int(ConstantStore.IsFirstLaunchSaveKey);
 
-            Log.Print($"bgm volume: {BgmVolume} / is bgm use: {IsBgmUse} / sfx volume: {SfxVolume} / is sfx use: {IsSfxUse}");
+            if (isFirstLaunch.Equals(int.MaxValue) || isFirstLaunch.Equals(1))
+            {
+                SetPlayerPrefs.Int(ConstantStore.IsFirstLaunchSaveKey, 0);
+            }
+            else
+            {
+                BgmVolume = GetPlayerPrefs.Float(ConstantStore.BgmVolumeSaveKey);
+                IsBgmUse = GetPlayerPrefs.Int(ConstantStore.BgmOnOffSaveKey).Equals(1);
+                SfxVolume = GetPlayerPrefs.Float(ConstantStore.SfxVolumeSaveKey);
+                IsSfxUse = GetPlayerPrefs.Int(ConstantStore.SfxOnOffSaveKey).Equals(1);
 
-            IsAntialiasingUse = GetPlayerPrefs.Int(ConstantStore.UseAntialiasingSaveKey).Equals(1);
-            IsHalfRenderScaleUse = GetPlayerPrefs.Int(ConstantStore.UseHalfRenderScaleSaveKey).Equals(1);
-            IsPostProcessingUse = GetPlayerPrefs.Int(ConstantStore.UsePostProcessingSaveKey).Equals(1);
+                Log.Print($"bgm volume: {BgmVolume} / is bgm use: {IsBgmUse} / sfx volume: {SfxVolume} / is sfx use: {IsSfxUse}");
 
-            Log.Print($"is half render scale use: {IsHalfRenderScaleUse} / is antialiasing use: {IsAntialiasingUse} / is post processing use: {IsPostProcessingUse}");
+                IsAntialiasingUse = GetPlayerPrefs.Int(ConstantStore.UseAntialiasingSaveKey).Equals(1);
+                IsHalfRenderScaleUse = GetPlayerPrefs.Int(ConstantStore.UseHalfRenderScaleSaveKey).Equals(1);
+                IsPostProcessingUse = GetPlayerPrefs.Int(ConstantStore.UsePostProcessingSaveKey).Equals(1);
+
+                Log.Print($"is half render scale use: {IsHalfRenderScaleUse} / is antialiasing use: {IsAntialiasingUse} / is post processing use: {IsPostProcessingUse}");
+            }
 
             SetLocalAudioSettings();
         }
