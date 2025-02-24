@@ -25,6 +25,11 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8447c820c16b5478babf0055c9e4a70a
+    m_Address: Assets/Asset Resources/Locales/Ranking Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: edc810b2319cb4a9fb781ea6d24bd3ce, type: 2}
   m_SchemaSet:
