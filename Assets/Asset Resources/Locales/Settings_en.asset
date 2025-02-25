@@ -17,7 +17,47 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 2d6c7f33be51541f486bf82ab1f8a832, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 103870881792
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428164931584
+    m_Localized: Sounds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428190097408
+    m_Localized: BGM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428190097409
+    m_Localized: SFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428190097410
+    m_Localized: Graphics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428190097411
+    m_Localized: Use Half Render Scale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428190097412
+    m_Localized: Use Antialiasing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428190097413
+    m_Localized: Use Post Processing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428190097414
+    m_Localized: Credit & Information
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428190097415
+    m_Localized: Delete Account
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

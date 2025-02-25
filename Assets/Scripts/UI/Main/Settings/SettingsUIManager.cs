@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Stores;
 using UI.Main.Credit;
 using UI.Main.Settings.Graphics;
 using UI.Main.Settings.Sounds;
@@ -33,6 +34,8 @@ namespace UI.Main.Settings
 
         public void Show()
         {
+            SettingsStore.GetLocalSettings();
+
             _bgmController.OnShowSettings();
             _sfxController.OnShowSettings();
 

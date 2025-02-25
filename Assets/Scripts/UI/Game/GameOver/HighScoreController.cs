@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Horang.HorangUnityLibrary.Modules.AudioModule;
+using Stores;
 using UnityEngine;
 
 namespace UI.Game.GameOver
@@ -12,7 +13,10 @@ namespace UI.Game.GameOver
 
         public void Show()
         {
-            AudioModule.VolumeByCategory(AudioDataType.AudioPlayType.BGM, 0.6f);
+            var currentSettingBgmVolume = SettingsStore.BgmVolume;
+            var targetVolume = currentSettingBgmVolume - 0.3f < 0.0f ? 0.0f : currentSettingBgmVolume - 0.3f;
+
+            AudioModule.VolumeByCategory(AudioDataType.AudioPlayType.BGM, targetVolume);
             AudioModule.Play("highscore");
 
             var sequence = DOTween.Sequence();
@@ -31,7 +35,7 @@ namespace UI.Game.GameOver
                 _logoParent.DOAnchorPosY(150.0f, 0.2f).From(new Vector2(0.0f, 0.0f));
                 _logoParentCanvasGroup.DOFade(0.0f, 0.3f);
 
-                AudioModule.VolumeByCategory(AudioDataType.AudioPlayType.BGM);
+                AudioModule.VolumeByCategory(AudioDataType.AudioPlayType.BGM, currentSettingBgmVolume);
             });
             sequence.Append(_canvasGroup.DOFade(0.0f, 0.5f));
 

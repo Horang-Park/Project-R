@@ -1,6 +1,7 @@
 using Horang.HorangUnityLibrary.Modules.AudioModule;
 using Horang.HorangUnityLibrary.Utilities;
 using Horang.HorangUnityLibrary.Utilities.PlayerPrefs;
+using UnityEngine;
 
 namespace Stores
 {
@@ -32,6 +33,8 @@ namespace Stores
                 SetPlayerPrefs.Int(ConstantStore.UseHalfRenderScaleSaveKey, 0);
                 SetPlayerPrefs.Int(ConstantStore.UseAntialiasingSaveKey, 1);
                 SetPlayerPrefs.Int(ConstantStore.UsePostProcessingSaveKey, 1);
+
+                PlayerPrefs.Save();
             }
 
             BgmVolume = GetPlayerPrefs.Float(ConstantStore.BgmVolumeSaveKey);
@@ -52,6 +55,7 @@ namespace Stores
 
         private static void SetLocalAudioSettings()
         {
+            // BGM
             AudioModule.VolumeByCategory(AudioDataType.AudioPlayType.BGM, BgmVolume);
 
             if (IsBgmUse)
@@ -63,6 +67,7 @@ namespace Stores
                 AudioModule.MuteByCategory(AudioDataType.AudioPlayType.BGM);
             }
 
+            // SFX
             AudioModule.VolumeByCategory(AudioDataType.AudioPlayType.OneshotSfx, SfxVolume);
             AudioModule.VolumeByCategory(AudioDataType.AudioPlayType.LoopSfx, SfxVolume);
 

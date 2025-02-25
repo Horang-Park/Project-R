@@ -16,7 +16,43 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 2d6c7f33be51541f486bf82ab1f8a832
   m_Entries:
   - m_Id: 103870881792
-    m_Key: New Entry
+    m_Key: settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428164931584
+    m_Key: sounds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428190097408
+    m_Key: bgm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428190097409
+    m_Key: sfx
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428190097410
+    m_Key: graphics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428190097411
+    m_Key: use_half_render_scale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428190097412
+    m_Key: use_antialiasing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428190097413
+    m_Key: use_post_processing
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428190097414
+    m_Key: credit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432428190097415
+    m_Key: delete_account
     m_Metadata:
       m_Items: []
   m_Metadata:

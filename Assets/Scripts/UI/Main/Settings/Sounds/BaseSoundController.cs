@@ -44,12 +44,12 @@ namespace UI.Main.Settings.Sounds
             _percentage.text = $"{(int)(value * 100.0f)}%";
         }
 
-        private void OnBeginDrag()
+        private static void OnBeginDrag()
         {
             AudioModule.Play("slider");
         }
 
-        private void OnEndDrag()
+        private static void OnEndDrag()
         {
             AudioModule.Stop("slider");
         }

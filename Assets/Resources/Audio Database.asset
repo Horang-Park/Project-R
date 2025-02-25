@@ -25,7 +25,7 @@ MonoBehaviour:
       channel: 2
       samplingFrequency: 44100
       sampleCount: 2523938
-      instanceId: 82860
+      instanceId: 51026
   - name: in_game_bgm
     audioClip: {fileID: 8300000, guid: 1cb4377e80d1c4687b0f70ad2a92353a, type: 3}
     audioPlayType: 1
@@ -38,7 +38,7 @@ MonoBehaviour:
       channel: 2
       samplingFrequency: 44100
       sampleCount: 2015409
-      instanceId: 82864
+      instanceId: 51028
   - name: credit_bgm
     audioClip: {fileID: 8300000, guid: b8e264b7855744c19b48dfbd96680924, type: 3}
     audioPlayType: 1
@@ -51,7 +51,7 @@ MonoBehaviour:
       channel: 2
       samplingFrequency: 44100
       sampleCount: 6542851
-      instanceId: 82858
+      instanceId: 51030
   - name: countdown
     audioClip: {fileID: 8300000, guid: bad478ba3e16240eebccf5f08bc629ba, type: 3}
     audioPlayType: 2
@@ -64,7 +64,7 @@ MonoBehaviour:
       channel: 2
       samplingFrequency: 44100
       sampleCount: 133088
-      instanceId: 82854
+      instanceId: 51032
   - name: start
     audioClip: {fileID: 8300000, guid: 6d5b292e5e6ed4818aed3393613a35cd, type: 3}
     audioPlayType: 2
@@ -77,7 +77,7 @@ MonoBehaviour:
       channel: 2
       samplingFrequency: 44100
       sampleCount: 151594
-      instanceId: 82856
+      instanceId: 51034
   - name: highscore
     audioClip: {fileID: 8300000, guid: a5fb948bf05a845518e1e1a35e7ec95a, type: 3}
     audioPlayType: 2
@@ -90,7 +90,7 @@ MonoBehaviour:
       channel: 2
       samplingFrequency: 44100
       sampleCount: 263419
-      instanceId: 82866
+      instanceId: 51036
   - name: notification
     audioClip: {fileID: 8300000, guid: ab39a45397dc74b4f89aa01fa0c08bf3, type: 3}
     audioPlayType: 2
@@ -103,7 +103,7 @@ MonoBehaviour:
       channel: 2
       samplingFrequency: 44100
       sampleCount: 118113
-      instanceId: 82862
+      instanceId: 51038
   - name: select
     audioClip: {fileID: 8300000, guid: 5a1b5c4852d1443b2bce1b2935633201, type: 3}
     audioPlayType: 2
@@ -116,8 +116,8 @@ MonoBehaviour:
       channel: 2
       samplingFrequency: 44100
       sampleCount: 78553
-      instanceId: 82868
-  - name: enemy_kill
+      instanceId: 51040
+  - name: shot
     audioClip: {fileID: 8300000, guid: af99f2dcad8cc4c17bb000531e3c1a66, type: 3}
     audioPlayType: 2
     audioClipVolume: 1
@@ -125,12 +125,12 @@ MonoBehaviour:
     audioClipAdditionalData:
       length: 1.2901814
       extension: .wav
-      importPath: Assets/Asset Resources/Audios/SFX/enemy_kill.wav
+      importPath: Assets/Asset Resources/Audios/SFX/shot.wav
       channel: 2
       samplingFrequency: 44100
       sampleCount: 56897
-      instanceId: 127504
-  - name: shot
+      instanceId: 51042
+  - name: enemy_kill
     audioClip: {fileID: 8300000, guid: 9bd818dd0097749eda9c4ead91fdd9f6, type: 3}
     audioPlayType: 2
     audioClipVolume: 1
@@ -138,11 +138,11 @@ MonoBehaviour:
     audioClipAdditionalData:
       length: 2.142857
       extension: .wav
-      importPath: Assets/Asset Resources/Audios/SFX/shot.wav
+      importPath: Assets/Asset Resources/Audios/SFX/enemy_kill.wav
       channel: 2
       samplingFrequency: 44100
       sampleCount: 94500
-      instanceId: 127502
+      instanceId: 51044
   - name: slider
     audioClip: {fileID: 8300000, guid: 0ccf4f8fbecbb4508929c20cae6e3b48, type: 3}
     audioPlayType: 3
@@ -155,4 +155,4 @@ MonoBehaviour:
       channel: 2
       samplingFrequency: 44100
       sampleCount: 3347
-      instanceId: 130018
+      instanceId: 51046
